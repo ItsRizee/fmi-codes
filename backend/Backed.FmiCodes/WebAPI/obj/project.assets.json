@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -51,8 +51,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\Domain\\Domain.csproj"
+            "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\Domain\\Domain.csproj"
             }
           }
         }

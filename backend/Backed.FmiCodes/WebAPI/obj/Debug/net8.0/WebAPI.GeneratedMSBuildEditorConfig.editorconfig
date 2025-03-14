@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Backed.FmiCodes
-build_property.ProjectDir = C:\Users\user\RiderProjects\Backed.FmiCodes\WebAPI\
+build_property.ProjectDir = C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WebAPI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

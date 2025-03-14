@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\Domain\\Domain.csproj",
+      "projectPath": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\RiderProjects\\Backed.FmiCodes\\Domain\\obj\\",
+      "outputPath": "C:\\Users\\user\\RiderProjects\\fmi-codes\\backend\\Backed.FmiCodes\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"

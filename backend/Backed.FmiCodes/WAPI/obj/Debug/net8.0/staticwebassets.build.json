@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vfL9VkxfthjGWsSlTaXfrKzvW1fBFE3ytnb+RVVeNoI=",
+  "Source": "WAPI",
+  "BasePath": "_content/WAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
