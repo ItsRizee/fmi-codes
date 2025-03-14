@@ -7,4 +7,16 @@
         <RootNamespace>WebApplication1</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.1" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.1" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
 </Project>

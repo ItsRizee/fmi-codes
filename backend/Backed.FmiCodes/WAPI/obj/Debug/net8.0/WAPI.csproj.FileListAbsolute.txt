@@ -24,3 +24,15 @@ C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.pdb
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.genruntimeconfig.cache
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\ref\WAPI.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MediatR.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Domain.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Domain.pdb
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.csproj.AssemblyReference.cache
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.csproj.Up2Date
