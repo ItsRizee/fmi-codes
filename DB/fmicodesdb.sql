@@ -1,0 +1,21 @@
+CREATE TABLE SatelliteTLE (
+	SatelliteName CHAR(50),
+    SatelliteNumber INT,
+    Classification CHAR(1),
+    InternationalDesignator VARCHAR(11),
+    EpochYear INT,
+    EpochDay FLOAT,
+    FirstTimeDerivativeOfMeanMotion FLOAT,
+    SecondTimeDerivativeOfMeanMotion FLOAT,
+    BSTARDragTerm FLOAT,
+    ElementSetNumber INT,
+    Line1Checksum INT,
+    Inclination FLOAT,
+    RightAscensionOfAscendingNode FLOAT,
+    Eccentricity FLOAT,
+    ArgumentOfPerigee FLOAT,
+    MeanAnomaly FLOAT,
+    MeanMotion FLOAT,
+    RevolutionNumberAtEpoch INT,
+    Line2Checksum INT
+);
