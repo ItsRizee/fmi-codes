@@ -2,6 +2,7 @@ namespace Domain.Satelite.Entity;
 
 public class SatelliteTLE
 {
+    private int Id { get; set; }
     private string Name { get; set; }
     private int Number { get; set; }
     private char Classification { get; set; }
@@ -21,12 +22,13 @@ public class SatelliteTLE
     private float MeanMotion { get; set; } 
     private int RevolutionNumberAtEpoch { get; set; }
     private int Line2Checksum { get; set; }
-    private string SateliteDescription { get; set; }
+    private string SatelliteDescription { get; set; }
     
     public SatelliteTLE() { }
 
-    public SatelliteTLE(string name, int number, char classification, string internationalDesignator, int epochYear, float epochDay, float firstTimeDerivativeOfMeanMotion, float secondTimeDerivativeOfMeanMotion, float bstarDragTerm, int elementSetNumber, int line1Checksum, float inclination, float rightAscensionOfAscendingNode, float eccentricity, float argumentOfPerigee, float meanAnomaly, float meanMotion, int revolutionNumberAtEpoch, int line2Checksum, string sateliteDescription)
+    public SatelliteTLE(int id, string name, int number, char classification, string internationalDesignator, int epochYear, float epochDay, float firstTimeDerivativeOfMeanMotion, float secondTimeDerivativeOfMeanMotion, float bstarDragTerm, int elementSetNumber, int line1Checksum, float inclination, float rightAscensionOfAscendingNode, float eccentricity, float argumentOfPerigee, float meanAnomaly, float meanMotion, int revolutionNumberAtEpoch, int line2Checksum, string satelliteDescription)
     {
+        Id = id;
         Name = name;
         Number = number;
         Classification = classification;
@@ -46,6 +48,6 @@ public class SatelliteTLE
         MeanMotion = meanMotion;
         RevolutionNumberAtEpoch = revolutionNumberAtEpoch;
         Line2Checksum = line2Checksum;
-        SateliteDescription = sateliteDescription;
+        SatelliteDescription = satelliteDescription;
     }
 }
