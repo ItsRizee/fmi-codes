@@ -71,11 +71,11 @@ const Home = () => {
                         MeanMotion: 15.50204603,
                     }} />
                     <Satellite tleData={{
-                        Inclination: 51.6445,
+                        Inclination: 0,
                         RightAscensionOfAscendingNode: 100.3765,
-                        Eccentricity: 0.002311,
-                        ArgumentOfPerigee: 20.6034,
-                        MeanAnomaly: 73.9288,
+                        Eccentricity: 0,
+                        ArgumentOfPerigee: 0,
+                        MeanAnomaly: 0,
                         MeanMotion: 15.50204603,
                     }} />
                     <Debris />
