@@ -15,13 +15,35 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import {getSatelliteByIdPagination} from "../services/getSatelliteByIdPagination";
 import { Chart } from "react-google-charts";
+import {getSatelliteById} from "../services/getSatelliteById";
 
 const Home = () => {
     const [search, setSearch] = useState('');
     const [satellites, setSatellites] = useState([]);
     const [page, setPage] = useState(0);
     const [checked, setChecked] = useState([]);
+    const [currentSatelliteIndex, setCurrentSatelliteIndex] = useState(0);
+    const [currentSatellite, setCurrentSatellite] = useState(null);
     const count = 10;
+    const maxCheckedSatellites = 3;
+
+    const options = {
+        chartArea: { width: "50%" },
+        hAxis: {
+          title: "Probabiility (%)",
+          minValue: 0,
+        },
+        vAxis: {
+          title: "Satellite",
+        },
+        backgroundColor: "#ababab", // Background outside chart
+        chartArea: {
+            backgroundColor: "#000000", // Background inside chart
+            width: "80%",
+            height: "70%",
+        },
+      };
+
 
     const fetchData = async () => {
         try {
@@ -33,20 +55,47 @@ const Home = () => {
     }
 
     useEffect(() => {
+        const fetch = async () => {
+            try {
+                if(currentSatellite != null && checked[currentSatelliteIndex] !== currentSatellite.id) {
+                    if(checked.length === 0) {
+                        setCurrentSatellite(null);
+                    } else {
+                        const tmp = (currentSatelliteIndex + checked.length) % checked.length;
+                        setCurrentSatelliteIndex(tmp);
+                        const data = await getSatelliteById(checked[tmp]);
+                        setCurrentSatellite(data);
+                    }
+                } else {
+                    const data = await getSatelliteById(checked[currentSatelliteIndex]);
+                    setCurrentSatellite(data);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetch();
+    }, [currentSatelliteIndex, checked]);
+
+    useEffect(() => {
         fetchData();
     }, []);
 
+    const goBack = () => {
+        if(currentSatelliteIndex === 0) {
+            setCurrentSatelliteIndex(checked.length < maxCheckedSatellites ? checked.length - 1 : maxCheckedSatellites - 1);
+        } else {
+            setCurrentSatelliteIndex((prev) => prev - 1);
+        }
+    }
 
-    const options = {
-        chartArea: { width: "50%" },
-        hAxis: {
-          title: "Probabiility (%)",
-          minValue: 0,
-        },
-        vAxis: {
-          title: "Satellite",
-        },
-      };
+    const goForward = () => {
+        if(currentSatelliteIndex + 1 === checked.length || currentSatelliteIndex + 1 === maxCheckedSatellites) {
+            setCurrentSatelliteIndex(0);
+        } else {
+            setCurrentSatelliteIndex((prev) => prev + 1);
+        }
+    }
 
     return (
         <div className="main-container">
@@ -89,22 +138,24 @@ const Home = () => {
                 />
 
             </Paper>
-            <Paper
-                elevation={3}
-                className='satellite-info-container'
-            >
-                <IconButton aria-label="arrow-back" className='arrow-back'>
-                    <ArrowBackIosIcon sx={{fontSize: '40px'}} />
-                </IconButton>
-                <h2 className='collision-heading'>Satellite 1 info</h2>
-                <p className='satellite-description'>This is some basic info about the satellite. It was launched in 2015 by Bulgaria. It is the first to make the big discovery.</p>
-                <Button variant="outlined" endIcon={<DoubleArrowIcon />}>
-                    Learn more
-                </Button>
-                <IconButton aria-label="arrow-forward" className='arrow-forward'>
-                    <ArrowForwardIosIcon sx={{fontSize: '40px'}} />
-                </IconButton>
-            </Paper>
+            { checked.length > 0 && currentSatellite !== null &&
+                <Paper
+                    elevation={3}
+                    className='satellite-info-container'
+                >
+                    <h2 className='collision-heading'>{currentSatellite.name}</h2>
+                    <p className='satellite-description'>{currentSatellite.satelliteDescription}</p>
+                    <Button variant="outlined" endIcon={<DoubleArrowIcon />}>
+                        Learn more
+                    </Button>
+                    <IconButton aria-label="arrow-back" className='arrow-back' onClick={goBack}>
+                        <ArrowBackIosIcon sx={{fontSize: '40px'}} />
+                    </IconButton>
+                    <IconButton aria-label="arrow-forward" className='arrow-forward' onClick={goForward}>
+                        <ArrowForwardIosIcon sx={{fontSize: '40px'}} />
+                    </IconButton>
+                </Paper>
+            }
             <Canvas>
                 <ambientLight intensity={0.1}/>
                 <OrbitControls enableZoom={false}/>
