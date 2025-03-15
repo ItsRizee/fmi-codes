@@ -1,4 +1,3 @@
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -6,8 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
-const CheckboxList = () => {
-    const [checked, setChecked] = React.useState([0]);
+const CheckboxList = ({satellites, checked, setChecked}) => {
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -24,23 +22,23 @@ const CheckboxList = () => {
 
     return (
         <List sx={{ width: '100%', maxWidth: 360 }}>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => {
+            {satellites.map((satellite) => {
                 return (
                     <ListItem
-                        key={value}
+                        key={satellite.id}
                         disablePadding
                     >
-                        <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                        <ListItemButton role={undefined} onClick={handleToggle(satellite.id)} dense>
                             <ListItemIcon>
                                 <Checkbox
                                     edge="start"
-                                    checked={checked.includes(value)}
+                                    checked={checked.includes(satellite.id)}
                                     tabIndex={-1}
                                     disableRipple
                                     sx={{color: 'rgba(240, 240, 240, 0.7)'}}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={`checkbox-list-label-${value}`} primary={`Satellite ${value + 1}`} sx={{color: 'rgba(240, 240, 240, 0.7)'}}/>
+                            <ListItemText id={`checkbox-list-label-${satellite.id}`} primary={`Satellite ${satellite.name}`} sx={{color: 'rgba(240, 240, 240, 0.7)'}}/>
                         </ListItemButton>
                     </ListItem>
                 );

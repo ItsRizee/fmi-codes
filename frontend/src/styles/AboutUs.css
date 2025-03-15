@@ -5,3 +5,14 @@
     background-size: cover;
     background-position: center;
 }
+
+.coders-text {
+    position: absolute;
+    right: 1%;
+    bottom: 1%;
+    color: white;
+}
+
+.coders-text span {
+    margin-left: 40px;
+}
