@@ -10,7 +10,8 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Satellite from '../components/Satellite';
 import Debris from '../components/Debris';
 import DownloadButton from '../components/DownloadButton';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import {getSatelliteByIdPagination} from "../services/getSatelliteByIdPagination";
 
@@ -18,6 +19,7 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [satellites, setSatellites] = useState([]);
     const [page, setPage] = useState(0);
+    const [checked, setChecked] = useState([]);
     const count = 10;
 
     const fetchData = async () => {
@@ -57,7 +59,7 @@ const Home = () => {
                     </IconButton>
                 </Paper>
                 <Divider className='divider' orientation="horizontal" />
-                <CheckboxList satellites={satellites} />
+                <CheckboxList satellites={satellites} checked={checked} setChecked={setChecked} />
             </Paper>
             <Paper
                 elevation={3}
@@ -71,11 +73,17 @@ const Home = () => {
                 elevation={3}
                 className='satellite-info-container'
             >
+                <IconButton aria-label="arrow-back" className='arrow-back'>
+                    <ArrowBackIosIcon sx={{fontSize: '40px'}} />
+                </IconButton>
                 <h2 className='collision-heading'>Satellite 1 info</h2>
                 <p className='satellite-description'>This is some basic info about the satellite. It was launched in 2015 by Bulgaria. It is the first to make the big discovery.</p>
                 <Button variant="outlined" endIcon={<DoubleArrowIcon />}>
                     Learn more
                 </Button>
+                <IconButton aria-label="arrow-forward" className='arrow-forward'>
+                    <ArrowForwardIosIcon sx={{fontSize: '40px'}} />
+                </IconButton>
             </Paper>
             <Canvas>
                 <ambientLight intensity={0.1}/>

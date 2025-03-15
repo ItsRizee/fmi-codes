@@ -28,6 +28,7 @@
     align-items: center;
     justify-content: start;
     background-color: rgba(25, 25, 25, 0.55) !important;
+    z-index: 2;
 }
 
 .search-input {
@@ -83,6 +84,7 @@ canvas {
     align-items: center;
     justify-content: start;
     background-color: rgba(25, 25, 25, 0.6) !important;
+    z-index: 2;
 }
 
 .collision-heading {
@@ -115,6 +117,7 @@ canvas {
     align-items: center;
     justify-content: start;
     background-color: rgba(25, 25, 25, 0.6) !important;
+    z-index: 2;
 }
 
 .satellite-description {
@@ -123,4 +126,20 @@ canvas {
     max-width: 330px;
     margin-top: 30px;
     margin-bottom: 40px;
+}
+
+.arrow-back {
+    position: absolute;
+    color: rgba(240, 240, 240, 0.6) !important;
+    right: 48%;
+    top: 40%;
+    font-size: 40px;
+}
+
+.arrow-forward {
+    position: absolute;
+    color: rgba(240, 240, 240, 0.6) !important;
+    left: 50%;
+    bottom: 68%;
+    font-size: 40px;
 }
