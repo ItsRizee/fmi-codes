@@ -9,10 +9,6 @@ export default function Satellite({ tleData }) {
     const scaleFactor = 1800000;
     let speed = 2;
 
-    let Inclination = tleData.Inclination
-    let RightAscensionOfAscendingNode = tleData.RightAscensionOfAscendingNode
-    let Eccentricity = tleData.Eccentricity
-    let ArgumentOfPerigee = tleData.ArgumentOfPerigee
     let MeanAnomaly = tleData.MeanAnomaly
     let MeanMotion = tleData.MeanMotion
 
@@ -46,8 +42,6 @@ export default function Satellite({ tleData }) {
         let x = coords[0]
         let y=coords[1]
         let z=coords[2]
-
-        console.log(x,y,z)
 
         orbitPoints.push([x / scaleFactor, y / scaleFactor, z / scaleFactor]);
     }
