@@ -1,6 +1,6 @@
 namespace Domain.Satelite.Entity;
 
-public class Satellite
+public class SatelliteTLE
 {
     private string Name { get; set; }
     private int Number { get; set; }
@@ -23,9 +23,9 @@ public class Satellite
     private int Line2Checksum { get; set; }
     private string SateliteDescription { get; set; }
     
-    public Satellite() { }
+    public SatelliteTLE() { }
 
-    public Satellite(string name, int number, char classification, string internationalDesignator, int epochYear, float epochDay, float firstTimeDerivativeOfMeanMotion, float secondTimeDerivativeOfMeanMotion, float bstarDragTerm, int elementSetNumber, int line1Checksum, float inclination, float rightAscensionOfAscendingNode, float eccentricity, float argumentOfPerigee, float meanAnomaly, float meanMotion, int revolutionNumberAtEpoch, int line2Checksum, string sateliteDescription)
+    public SatelliteTLE(string name, int number, char classification, string internationalDesignator, int epochYear, float epochDay, float firstTimeDerivativeOfMeanMotion, float secondTimeDerivativeOfMeanMotion, float bstarDragTerm, int elementSetNumber, int line1Checksum, float inclination, float rightAscensionOfAscendingNode, float eccentricity, float argumentOfPerigee, float meanAnomaly, float meanMotion, int revolutionNumberAtEpoch, int line2Checksum, string sateliteDescription)
     {
         Name = name;
         Number = number;
