@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import { useGLTF } from '@react-three/drei';
+import React, { useRef, useEffect, useState } from 'react';
+import { useGLTF, Line } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { TLEtoXYZ } from '../TLEtoXYZ';
 
-const generateRandomOrbit = () => {
+const createRandomFlightPath = () => {
     return {
         Inclination: Math.random() * 180,
         RightAscensionOfAscendingNode: Math.random() * 360,
@@ -14,48 +14,72 @@ const generateRandomOrbit = () => {
     };
 };
 
-export default function Debris() {
+export default function SpaceJunkScene() {
     const { nodes, materials } = useGLTF('/debris.gltf');
-    const debrisCount = 50;
-    const debrisRefs = useRef([]);
-    const debrisOrbits = useRef([]);
-    const scaleFactor = 1800000;
-    const speed = 2;
+    const numberOfJunkPieces = 5;
+    const junkPieceRefs = useRef([]);
+    const junkPieceFlightPaths = useRef([]);
+    const spaceScaleFactor = 1800000;
+    const junkSpeed = 2;
+    const [flightPathLines, setFlightPathLines] = useState([]);
 
     useEffect(() => {
-        const orbits = [];
-        for (let i = 0; i < debrisCount; i++) {
-            orbits.push(generateRandomOrbit());
+        const flightPaths = [];
+        for (let i = 0; i < numberOfJunkPieces; i++) {
+            flightPaths.push(createRandomFlightPath());
         }
-        debrisOrbits.current = orbits;
-    }, [debrisCount]);
+        junkPieceFlightPaths.current = flightPaths;
+
+        const lines = [];
+        for (let i = 0; i < numberOfJunkPieces; i++) {
+            const pathPoints = [];
+            const pathData = flightPaths[i];
+
+            for (let j = 0; j <= 100; j++) {
+                let progress = j / 100;
+                let junkPositionOnPath = progress * 2 * Math.PI;
+
+                let tempPathData = { ...pathData, MeanAnomaly: junkPositionOnPath * (180 / Math.PI) };
+
+                let coordinates = TLEtoXYZ(tempPathData);
+                let x = coordinates[0];
+                let y = coordinates[1];
+                let z = coordinates[2];
+
+                pathPoints.push([x / spaceScaleFactor, y / spaceScaleFactor, z / spaceScaleFactor]);
+            }
+
+            lines.push(<Line key={i} points={pathPoints} color="gray" lineWidth={1} />);
+        }
+        setFlightPathLines(lines);
+    }, [numberOfJunkPieces]);
 
     useFrame(({ clock }) => {
         const time = clock.elapsedTime;
 
-        for (let i = 0; i < debrisCount; i++) {
-            if (debrisRefs.current[i] && debrisOrbits.current[i]) { // Check if debrisOrbits[i] exists
-                let orbitData = debrisOrbits.current[i];
-                let M = (orbitData.MeanAnomaly + orbitData.MeanMotion * time) * speed;
-                let tleData = { ...orbitData, MeanAnomaly: M };
+        for (let i = 0; i < numberOfJunkPieces; i++) {
+            if (junkPieceRefs.current[i] && junkPieceFlightPaths.current[i]) {
+                let pathData = junkPieceFlightPaths.current[i];
+                let currentPosition = (pathData.MeanAnomaly + pathData.MeanMotion * time) * junkSpeed;
+                let currentPathData = { ...pathData, MeanAnomaly: currentPosition };
 
-                let coords = TLEtoXYZ(tleData);
-                let x = coords[0];
-                let y = coords[1];
-                let z = coords[2];
+                let coordinates = TLEtoXYZ(currentPathData);
+                let x = coordinates[0];
+                let y = coordinates[1];
+                let z = coordinates[2];
 
-                debrisRefs.current[i].position.set(x / scaleFactor, y / scaleFactor, z / scaleFactor);
-                debrisRefs.current[i].lookAt(0, 0, 0);
+                junkPieceRefs.current[i].position.set(x / spaceScaleFactor, y / spaceScaleFactor, z / spaceScaleFactor);
+                junkPieceRefs.current[i].lookAt(0, 0, 0);
             }
         }
     });
 
     return (
         <>
-            {Array(debrisCount)
+            {Array(numberOfJunkPieces)
                 .fill()
                 .map((_, index) => (
-                    <group key={index} ref={(ref) => (debrisRefs.current[index] = ref)} dispose={null}>
+                    <group key={index} ref={(ref) => (junkPieceRefs.current[index] = ref)} dispose={null}>
                         <mesh
                             geometry={nodes.defaultMaterial.geometry}
                             material={materials.scrap}
@@ -63,6 +87,7 @@ export default function Debris() {
                         />
                     </group>
                 ))}
+            {flightPathLines}
         </>
     );
 }
