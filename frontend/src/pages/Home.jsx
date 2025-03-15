@@ -38,8 +38,8 @@ const Home = () => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                if(currentSatellite != null && checked[currentSatelliteIndex] != currentSatellite.id) {
-                    if(checked.length == 0) {
+                if(currentSatellite != null && checked[currentSatelliteIndex] !== currentSatellite.id) {
+                    if(checked.length === 0) {
                         setCurrentSatellite(null);
                     } else {
                         const tmp = (currentSatelliteIndex + checked.length) % checked.length;
@@ -71,7 +71,7 @@ const Home = () => {
     }
 
     const goForward = () => {
-        if(currentSatelliteIndex + 1 == checked.length || currentSatelliteIndex + 1 == maxCheckedSatellites) {
+        if(currentSatelliteIndex + 1 === checked.length || currentSatelliteIndex + 1 === maxCheckedSatellites) {
             setCurrentSatelliteIndex(0);
         } else {
             setCurrentSatelliteIndex((prev) => prev + 1);
