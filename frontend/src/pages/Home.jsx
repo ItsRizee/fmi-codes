@@ -10,6 +10,7 @@ import CheckboxList from "../components/CheckboxList";
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Satellite from '../components/Satellite';
 import Debris from '../components/Debris';
+import DownloadButton from '../components/DownloadButton';
 
 const Home = () => {
     const [count, setCount] = useState(0);
@@ -67,6 +68,7 @@ const Home = () => {
                 </Suspense>
                 <Environment preset='sunset'/>
             </Canvas>
+            <DownloadButton/>
         </div>
     );
 }
