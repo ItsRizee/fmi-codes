@@ -1,0 +1,28 @@
+# Use official Python image as base
+FROM conda/miniconda3
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# RUN apt update
+# RUN apt -y install curl
+# RUN apt -y install pip
+# RUN apt -y install git
+# RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+# RUN bash Miniforge3-$(uname)-$(uname -m).sh -b
+RUN conda init
+RUN conda install -c conda-forge orekit
+# RUN pip install git+https://gitlab.orekit.org/orekit/orekit-data.git
+
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application files
+COPY . .
+
+# Expose port 5000
+EXPOSE 5000
+
+# Run the Flask app
+CMD ["python", "flask_server.py"]

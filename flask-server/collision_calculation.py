@@ -3,23 +3,12 @@ import numpy as np
 vm = orekit.initVM()
 
 
-from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir('./flask-server/orekit-data.zip')
+from orekit.pyhelpers import setup_orekit_curdir, download_orekit_data_curdir
+download_orekit_data_curdir()
+setup_orekit_curdir('./orekit-data.zip')
 
-from org.orekit.utils import Constants
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.propagation.analytical.tle import TLE, TLEPropagator
-from org.orekit.ssa.collision.shorttermencounter.probability.twod import ShortTermEncounter2DDefinition, Patera2005
-from org.orekit.propagation.numerical import NumericalPropagator
-from org.orekit.forces.gravity import HolmesFeatherstoneAttractionModel
-from org.orekit.forces.radiation import SolarRadiationPressure
-from org.orekit.models.earth.atmosphere import HarrisPriester
-from org.orekit.frames import FramesFactory
-from org.orekit.orbits import KeplerianOrbit, OrbitType, PositionAngleType
-from org.orekit.propagation import StateCovariance
-from org.orekit.bodies import OneAxisEllipsoid
-from org.orekit.forces.drag import DragForce
-from org.hipparchus.ode.nonstiff import ClassicalRungeKuttaIntegrator
 from math import radians, degrees
 
 def normal_distribution_mapping(x, sigma=500, threshold=0):
