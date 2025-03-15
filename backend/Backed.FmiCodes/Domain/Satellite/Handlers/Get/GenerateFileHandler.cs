@@ -31,7 +31,7 @@ public class GenerateFileHandler : IRequestHandler<GenerateFileRequest, FileCont
             .Select(s => new SatelliteFileDTO(s.Id, s.SatelliteName, s.SatelliteNumber,
                 s.Classification, s.InternationalDesignator, s.EpochYear,
                 s.EpochDay, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion,
-                s.BSTARDragTerm, s.ElementSetNumber, s.Line1Checksum, s.Inclination,
+                s.BstarDragTerm, s.ElementSetNumber, s.Line1Checksum, s.Inclination,
                 s.RightAscensionOfAscendingNode, s.Eccentricity, s.ArgumentOfPerigee,
                 s.MeanAnomaly, s.MeanMotion, s.RevolutionNumberAtEpoch,
                 s.Line2Checksum, s.SatelliteDescription))

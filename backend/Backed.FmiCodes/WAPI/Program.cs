@@ -1,6 +1,7 @@
 using System.Reflection;
 using Domain.Satelite;
 using Domain.Satelite.Handlers.Get;
+using Domain.Satelite.Handlers.Get.FlaskGetDTO;
 using Domain.Satellite.Dto;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,9 @@ builder.Services.AddTransient<IRequestHandler<GetSatelliteByIdRequest, Satellite
 // Add HTTP client and MediatR services
 builder.Services.AddHttpClient();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.Load("Domain")));
+
+builder.Services.AddTransient<FlaskGetHandler>(); 
+builder.Services.AddTransient<GetWillCollideHandler>(); 
 
 // Register Swagger and CORS services before building the app
 builder.Services.AddEndpointsApiExplorer();
