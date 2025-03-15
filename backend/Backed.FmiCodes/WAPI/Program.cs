@@ -1,6 +1,8 @@
 using System.Reflection;
 using Domain.Satelite;
 using Domain.Satelite.Handlers.Get;
+using Domain.Satelite.Handlers.Get.FlaskGetDTO;
+using Domain.Satelite.Handlers.Get.GetDebris;
 using Domain.Satellite.Dto;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,8 @@ builder.Services.AddDbContext<SatelliteDbContext>(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddTransient<IRequestHandler<GetSatelliteByIdRequest, SatelliteDTO>, GetSatelliteByIdHandler>();
-
+builder.Services.AddTransient<FlaskGetHandler>();
+builder.Services.AddTransient<GetDebriesHandler>();
 builder.Services.AddHttpClient();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.Load("Domain")));
 

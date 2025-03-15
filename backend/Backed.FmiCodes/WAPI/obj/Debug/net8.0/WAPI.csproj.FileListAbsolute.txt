@@ -96,3 +96,5 @@ C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
