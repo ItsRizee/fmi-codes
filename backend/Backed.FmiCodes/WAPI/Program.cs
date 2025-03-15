@@ -27,6 +27,15 @@ builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 builder.Services.AddSingleton<IConfiguration>(configuration);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5000); 
+    serverOptions.ListenLocalhost(5001, listenOptions => 
+    {
+        listenOptions.UseHttps();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
