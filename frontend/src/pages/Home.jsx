@@ -1,6 +1,6 @@
 import { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls } from '@react-three/drei';
+import {Environment, OrbitControls, PerspectiveCamera} from '@react-three/drei';
 import Earth from '../components/Earth';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
@@ -17,7 +17,7 @@ const Home = () => {
     return (
         <div className="main-container">
             <div className="overlay"/>
-            <h1>Welcome to <Link to="/about-us">SpaceX</Link></h1>
+            <h1>Welcome to <span className='team-color'>ScrapSAT</span></h1>
             <Paper
                 elevation={3}
                 className='satellites-container'
@@ -29,7 +29,7 @@ const Home = () => {
                 >
                     <InputBase
                         className='input-base'
-                        placeholder="Search Satelites"
+                        placeholder="Search Satellites"
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
                     <IconButton type="button" sx={{ p: '10px', marginRight: '20px' }} aria-label="search">
@@ -44,14 +44,14 @@ const Home = () => {
                 className='collision-container'
             >
                 <h2 className='collision-heading'>Collision chance</h2>
-                <p className='collision-chance' style={{color: 'darkorange'}}>50%</p>
+                <p className='collision-chance' style={{color: '#1976d2'}}>50%</p>
                 <p className='collision-date'>24.03.2025</p>
             </Paper>
             <Paper
                 elevation={3}
                 className='satellite-info-container'
             >
-                <h2 className='collision-heading'>Satelite 1 info</h2>
+                <h2 className='collision-heading'>Satellite 1 info</h2>
                 <p className='satellite-description'>This is some basic info about the satellite. It was launched in 2015 by Bulgaria. It is the first to make the big discovery.</p>
                 <Button variant="outlined" endIcon={<DoubleArrowIcon />}>
                     Learn more
@@ -62,7 +62,22 @@ const Home = () => {
                 <OrbitControls enableZoom={false}/>
                 <Suspense fallback={null}>
                     <Earth/>
-                    <Satellite radius={3} speed={2} />
+                    <Satellite tleData={{
+                        Inclination: 51.6445,
+                        RightAscensionOfAscendingNode: 100.3765,
+                        Eccentricity: 0.002311,
+                        ArgumentOfPerigee: 20.6034,
+                        MeanAnomaly: 73.9288,
+                        MeanMotion: 15.50204603,
+                    }} />
+                    <Satellite tleData={{
+                        Inclination: 51.6445,
+                        RightAscensionOfAscendingNode: 100.3765,
+                        Eccentricity: 0.002311,
+                        ArgumentOfPerigee: 20.6034,
+                        MeanAnomaly: 73.9288,
+                        MeanMotion: 15.50204603,
+                    }} />
                     <Debris />
                 </Suspense>
                 <Environment preset='sunset'/>
