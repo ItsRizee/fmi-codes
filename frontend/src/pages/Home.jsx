@@ -14,6 +14,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import {getSatelliteByIdPagination} from "../services/getSatelliteByIdPagination";
+import { Chart } from "react-google-charts";
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -34,6 +35,18 @@ const Home = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+
+    const options = {
+        chartArea: { width: "50%" },
+        hAxis: {
+          title: "Probabiility (%)",
+          minValue: 0,
+        },
+        vAxis: {
+          title: "Satellite",
+        },
+      };
 
     return (
         <div className="main-container">
@@ -65,9 +78,16 @@ const Home = () => {
                 elevation={3}
                 className='collision-container'
             >
-                <h2 className='collision-heading'>Collision chance</h2>
-                <p className='collision-chance' style={{color: '#1976d2'}}>50%</p>
-                <p className='collision-date'>24.03.2025</p>
+                <h2 className='collision-heading'>Collision Probabiility</h2>
+                <Chart
+                // Bar is the equivalent chart type for the material design version.
+                chartType="BarChart"
+                width="100%"
+                height="400px"
+                data={[["Satellite", "Probability"], ["ISS", 31], ["Copernicus", 14], ["Balkan 1", 1.2]]}
+                options={options}
+                />
+
             </Paper>
             <Paper
                 elevation={3}
