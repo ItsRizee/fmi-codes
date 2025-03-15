@@ -11,6 +11,8 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Satellite from '../components/Satellite';
 import Debris from '../components/Debris';
 
+
+
 const Home = () => {
     const [count, setCount] = useState(0);
 
@@ -71,9 +73,9 @@ const Home = () => {
                         MeanMotion: 15.50204603,
                     }} />
                     <Satellite tleData={{
-                        Inclination: 0,
-                        RightAscensionOfAscendingNode: 100.3765,
-                        Eccentricity: 0,
+                        Inclination: 90,
+                        RightAscensionOfAscendingNode: 0,
+                        Eccentricity: 0.3,
                         ArgumentOfPerigee: 0,
                         MeanAnomaly: 0,
                         MeanMotion: 15.50204603,

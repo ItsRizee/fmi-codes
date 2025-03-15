@@ -4,7 +4,6 @@ vm = orekit.initVM()
 
 
 from orekit.pyhelpers import setup_orekit_curdir
-orekit.pyhelpers.download_orekit_data_curdir()
 setup_orekit_curdir('./flask-server/orekit-data.zip')
 
 from org.orekit.utils import Constants
@@ -50,9 +49,6 @@ def possibility_of_collision(line1_1, line2_1, line1_2, line2_2):
     utc = TimeScalesFactory.getUTC()
     encounter_date = AbsoluteDate(2024, 1, 1, 12, 0, 0.0, utc)
 
-    print(propagator1.getPVCoordinates())
-    return
-
     time_window = 60.0 * 10  # 10 minutes
     time_step = 60.0  # 1 minute
 
@@ -78,3 +74,6 @@ def possibility_of_collision(line1_1, line2_1, line1_2, line2_2):
             most_probable_collision_time = dt
 
     return {pc, minimum_distance, most_probable_collision_time}
+
+
+possibility_of_collision(line1_1, line2_1, line1_2, line2_2)
