@@ -58,4 +58,22 @@ public class Controllers : ControllerBase
 
     }
 
+    [HttpPost("GenerateFile")]
+    public async Task<IActionResult> GenerateFile([FromBody]int[] ids)
+    {
+        if (ids.Count() == 0)
+        {
+            Console.WriteLine("Ajdeee batjooooooo");
+        }
+        else
+        {   
+            Console.WriteLine("Ajdeo maznooo");
+        }
+
+        var file = await _mediator.Send(new GenerateFileRequest(ids)); 
+
+        // Return the file content directly
+        return file;
+    }
+
 }
