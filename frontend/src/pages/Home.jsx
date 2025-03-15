@@ -1,8 +1,7 @@
-import { useState, Suspense } from 'react';
+import {useState, Suspense, useEffect} from 'react';
 import { Canvas } from '@react-three/fiber';
-import {Environment, OrbitControls, PerspectiveCamera} from '@react-three/drei';
+import {Environment, OrbitControls} from '@react-three/drei';
 import Earth from '../components/Earth';
-import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import {Divider, Paper, InputBase, IconButton, Button} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,9 +12,26 @@ import Debris from '../components/Debris';
 import DownloadButton from '../components/DownloadButton';
 
 
+import {getSatelliteByIdPagination} from "../services/getSatelliteByIdPagination";
 
 const Home = () => {
-    const [count, setCount] = useState(0);
+    const [search, setSearch] = useState('');
+    const [satellites, setSatellites] = useState([]);
+    const [page, setPage] = useState(0);
+    const count = 10;
+
+    const fetchData = async () => {
+        try {
+            const data = await getSatelliteByIdPagination(search, page, count);
+            setSatellites(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <div className="main-container">
@@ -34,13 +50,14 @@ const Home = () => {
                         className='input-base'
                         placeholder="Search Satellites"
                         inputProps={{ 'aria-label': 'search google maps' }}
+                        onChange={(e) => {setSearch(e.target.value)}}
                     />
-                    <IconButton type="button" sx={{ p: '10px', marginRight: '20px' }} aria-label="search">
+                    <IconButton type="button" sx={{ p: '10px', marginRight: '20px' }} aria-label="search" onClick={fetchData}>
                         <SearchIcon sx={{color: 'rgba(240, 240, 240, 0.7)'}} />
                     </IconButton>
                 </Paper>
                 <Divider className='divider' orientation="horizontal" />
-                <CheckboxList />
+                <CheckboxList satellites={satellites} />
             </Paper>
             <Paper
                 elevation={3}
@@ -68,17 +85,9 @@ const Home = () => {
                     <Satellite tleData={{
                         Inclination: 51.6445,
                         RightAscensionOfAscendingNode: 100.3765,
-                        Eccentricity: 0.002311,
-                        ArgumentOfPerigee: 20.6034,
+                        Eccentricity: 0,
+                        ArgumentOfPerigee: 5.33,
                         MeanAnomaly: 73.9288,
-                        MeanMotion: 15.50204603,
-                    }} />
-                    <Satellite tleData={{
-                        Inclination: 90,
-                        RightAscensionOfAscendingNode: 0,
-                        Eccentricity: 0.3,
-                        ArgumentOfPerigee: 0,
-                        MeanAnomaly: 0,
                         MeanMotion: 15.50204603,
                     }} />
                     <Debris />
