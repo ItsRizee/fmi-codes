@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4963a544e88648e73dc8563ebb7af8a34f032b4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1deaf6a1fd0fe8e7abf7c627d9774149350f77c9")]
 [assembly: System.Reflection.AssemblyProductAttribute("WAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

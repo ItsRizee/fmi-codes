@@ -2,10 +2,10 @@ namespace Domain.Satellite.Dto;
 
 public class SatelliteDTO
 {
-    private int Id { get; set; }
-    private string Name { get; set; }
-    private int Number { get; set; }
-    private string SatelliteDescription { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Number { get; set; }
+    public string SatelliteDescription { get; set; }
     public SatelliteDTO() { }
 
     public SatelliteDTO(int id, string name, int number, string satelliteDescription)

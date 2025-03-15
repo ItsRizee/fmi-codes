@@ -74,3 +74,14 @@ C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.csproj.AssemblyReference.cache
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\obj\Debug\net8.0\WAPI.csproj.Up2Date
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll

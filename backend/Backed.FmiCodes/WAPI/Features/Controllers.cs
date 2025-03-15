@@ -15,10 +15,14 @@ public class Controllers : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("id")]
-    public async Task<IActionResult> GetSatelliteId(int id)
+    [HttpGet]
+    public async Task<IActionResult> GetSatelliteId()
     {
-        var satellite = await _mediator.Send(new GetSatelliteByIdRequest { Id = id });
+
+        Console.WriteLine("Hellooooo="); 
+        var satellite = await _mediator.Send(new GetSatelliteByIdRequest { Id =1 });
+        if(satellite == null)
+            return BadRequest("Error occurred");
         
         return Ok(satellite);
     }

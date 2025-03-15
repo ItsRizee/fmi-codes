@@ -1,5 +1,8 @@
 using System.Reflection;
 using Domain.Satelite;
+using Domain.Satelite.Handlers.Get;
+using Domain.Satellite.Dto;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,10 @@ builder.Services.AddDbContext<SatelliteDbContext>(options =>
 
 
 builder.Services.AddControllers();
+
+builder.Services.AddTransient<IRequestHandler<GetSatelliteByIdRequest, SatelliteDTO>, GetSatelliteByIdHandler>();
+
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.Load("Domain")));
 
 builder.Services.AddEndpointsApiExplorer();
@@ -23,5 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.MapControllers(); 
 
 app.Run();
