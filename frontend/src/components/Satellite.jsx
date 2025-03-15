@@ -26,33 +26,147 @@
 //
 // useGLTF.preload('/satellite.gltf')
 
+// import { useRef } from "react";
+// import { useFrame } from "@react-three/fiber";
+// import { useGLTF, Line } from "@react-three/drei";
+//
+// export default function Satellite({ radius = 6, speed = 1 }) {
+//     const { nodes, materials } = useGLTF('/satellite.gltf');
+//     const satelliteRef = useRef();
+//
+//     useFrame(({ clock }) => {
+//         if (satelliteRef.current) {
+//             const angle = clock.elapsedTime * speed; // Keep angle increasing over time
+//
+//             // Set satellite position (circular orbit around Earth)
+//             satelliteRef.current.position.x = Math.cos(angle) * radius;
+//             satelliteRef.current.position.z = Math.sin(angle) * radius;
+//             satelliteRef.current.position.y = 0; // Keep a stable height (no vertical movement)
+//
+//             // Rotate the satellite to always face the orbit direction
+//             satelliteRef.current.lookAt(0, 0, 0);
+//         }
+//     });
+//
+//     // Create the orbit path as a visible ring
+//     const orbitPoints = [];
+//     for (let i = 0; i <= 100; i++) {
+//         const angle = (i / 100) * Math.PI * 2; // Full circle
+//         orbitPoints.push([Math.cos(angle) * radius, 0, Math.sin(angle) * radius]);
+//     }
+//
+//     return (
+//         <>
+//             {/* Satellite Mesh */}
+//             <group ref={satelliteRef} dispose={null}>
+//                 <mesh
+//                     geometry={nodes.Cube001__0.geometry}
+//                     material={materials['Scene_-_Root']}
+//                     scale={0.4}
+//                 />
+//             </group>
+//
+//             {/* Visible Orbit Path */}
+//             <Line
+//                 points={orbitPoints}
+//                 color="white"
+//                 lineWidth={2}
+//             />
+//         </>
+//     );
+// }
+//
+// useGLTF.preload('/satellite.gltf');
+
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, Line } from "@react-three/drei";
 
-export default function Satellite({ radius = 6, speed = 1 }) {
+// Convert degrees to radians
+const degToRad = (deg) => (deg * Math.PI) / 180;
+
+// Solve Kepler's Equation using Newton's method
+const solveKepler = (M, e, tolerance = 1e-6, maxIterations = 15) => {
+    let E = M; // Initial guess
+    for (let i = 0; i < maxIterations; i++) {
+        let delta = E - e * Math.sin(E) - M;
+        if (Math.abs(delta) < tolerance) break;
+        E -= delta / (1 - e * Math.cos(E)); // Newton-Raphson method
+    }
+    return 2 * Math.atan2(Math.sqrt(1 + e) * Math.sin(E / 2), Math.sqrt(1 - e) * Math.cos(E / 2));
+};
+
+export default function Satellite({ tleData }) {
     const { nodes, materials } = useGLTF('/satellite.gltf');
     const satelliteRef = useRef();
+    const scaleFactor = 1400000;
+    let speed = 500;
+
+    // Extract orbital parameters from TLE data
+    const inclination = degToRad(tleData.Inclination);
+    const raan = degToRad(tleData.RightAscensionOfAscendingNode);
+    const eccentricity = tleData.Eccentricity;
+    const argPerigee = degToRad(tleData.ArgumentOfPerigee);
+    const meanAnomaly = degToRad(tleData.MeanAnomaly);
+    const meanMotion = tleData.MeanMotion * (2 * Math.PI) / 86400; // Convert rev/day to rad/sec
+
+    // Semi-major axis (convert to meters)
+    const semiMajorAxis = Math.pow(398600.4418 / Math.pow(meanMotion, 2), 1 / 3) * 1000;
 
     useFrame(({ clock }) => {
         if (satelliteRef.current) {
-            const angle = clock.elapsedTime * speed; // Keep angle increasing over time
+            const t = clock.elapsedTime;
+            const M = meanAnomaly + meanMotion * t * speed; // Update mean anomaly
+            const trueAnomaly = solveKepler(M, eccentricity); // Solve for true anomaly
 
-            // Set satellite position (circular orbit around Earth)
-            satelliteRef.current.position.x = Math.cos(angle) * radius;
-            satelliteRef.current.position.z = Math.sin(angle) * radius;
-            satelliteRef.current.position.y = 0; // Keep a stable height (no vertical movement)
+            // Compute orbital position in the orbital plane
+            const r = semiMajorAxis * ((1 - eccentricity**2)/(1+eccentricity * Math.cos(trueAnomaly)));
+            const xOrb = r * Math.cos(trueAnomaly);
+            const yOrb = r * Math.sin(trueAnomaly);
 
-            // Rotate the satellite to always face the orbit direction
+            // Rotate from orbital plane to 3D space using rotation matrices
+            const cosRAAN = Math.cos(raan);
+            const sinRAAN = Math.sin(raan);
+            const cosInc = Math.cos(inclination);
+            const sinInc = Math.sin(inclination);
+            const cosArgPer = Math.cos(argPerigee);
+            const sinArgPer = Math.sin(argPerigee);
+
+            const x =
+                xOrb * (cosRAAN * cosArgPer - sinRAAN * sinArgPer * cosInc) -
+                yOrb * (cosRAAN * sinArgPer + sinRAAN * cosArgPer * cosInc);
+
+            const y =
+                xOrb * (sinRAAN * cosArgPer + cosRAAN * sinArgPer * cosInc) +
+                yOrb * (sinRAAN * sinArgPer - cosRAAN * cosArgPer * cosInc);
+
+            const z = xOrb * sinArgPer * sinInc + yOrb * cosArgPer * sinInc;
+
+            satelliteRef.current.position.set(x / scaleFactor, y / scaleFactor, z / scaleFactor);
             satelliteRef.current.lookAt(0, 0, 0);
         }
     });
 
-    // Create the orbit path as a visible ring
+    // Generate orbit path visualization
     const orbitPoints = [];
     for (let i = 0; i <= 100; i++) {
-        const angle = (i / 100) * Math.PI * 2; // Full circle
-        orbitPoints.push([Math.cos(angle) * radius, 0, Math.sin(angle) * radius]);
+        const angle = (i / 100) * Math.PI * 2;
+        const trueAnomaly = solveKepler(angle, eccentricity);
+        const r = semiMajorAxis * ((1 - eccentricity**2)/(1+eccentricity * Math.cos(trueAnomaly)));
+        const xOrb = r * Math.cos(trueAnomaly);
+        const yOrb = r * Math.sin(trueAnomaly);
+
+        const x =
+            xOrb * (Math.cos(raan) * Math.cos(argPerigee) - Math.sin(raan) * Math.sin(argPerigee) * Math.cos(inclination)) -
+            yOrb * (Math.cos(raan) * Math.sin(argPerigee) + Math.sin(raan) * Math.cos(argPerigee) * Math.cos(inclination));
+
+        const y =
+            xOrb * (Math.sin(raan) * Math.cos(argPerigee) + Math.cos(raan) * Math.sin(argPerigee) * Math.cos(inclination)) +
+            yOrb * (Math.sin(raan) * Math.sin(argPerigee) - Math.cos(raan) * Math.cos(argPerigee) * Math.cos(inclination));
+
+        const z = xOrb * Math.sin(argPerigee) * Math.sin(inclination) + yOrb * Math.cos(argPerigee) * Math.sin(inclination);
+
+        orbitPoints.push([x / scaleFactor, y / scaleFactor, z / scaleFactor]);
     }
 
     return (

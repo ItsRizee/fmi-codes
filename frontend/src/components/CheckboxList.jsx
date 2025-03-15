@@ -40,7 +40,7 @@ const CheckboxList = () => {
                                     sx={{color: 'rgba(240, 240, 240, 0.7)'}}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={`checkbox-list-label-${value}`} primary={`Satelite ${value + 1}`} sx={{color: 'rgba(240, 240, 240, 0.7)'}}/>
+                            <ListItemText id={`checkbox-list-label-${value}`} primary={`Satellite ${value + 1}`} sx={{color: 'rgba(240, 240, 240, 0.7)'}}/>
                         </ListItemButton>
                     </ListItem>
                 );
