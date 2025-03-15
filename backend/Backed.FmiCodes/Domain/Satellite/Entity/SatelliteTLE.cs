@@ -22,7 +22,7 @@ public class SatelliteTLE
     public float MeanMotion { get; set; } 
     public int RevolutionNumberAtEpoch { get; set; }
     public int Line2Checksum { get; set; }
-    public string SatelliteDescription { get; set; }
+    public string? SatelliteDescription { get; set; }
     
     public SatelliteTLE() { }
 

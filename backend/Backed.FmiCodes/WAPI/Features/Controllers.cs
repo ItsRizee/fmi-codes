@@ -15,14 +15,32 @@ public class Controllers : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetSatelliteId()
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSatelliteId(int id)
     {
-        var satellite = await _mediator.Send(new GetSatelliteByIdRequest { Id =1 });
-        if(satellite == null)
-            return BadRequest("Error occurred");
-        
-        return Ok(satellite);
+        try
+        {
+            var satellite = await _mediator.Send(new GetSatelliteByIdRequest { Id = id });
+            return Ok(satellite);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [HttpGet("willCollide/{id}")]
+    public async Task<IActionResult> WillCollide(int id)
+    {
+        try
+        {
+            var satellite = await _mediator.Send(new GetWillCollideRequest { Id = id });
+            return Ok(satellite);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet("GetSatelliteByIdPagination")]

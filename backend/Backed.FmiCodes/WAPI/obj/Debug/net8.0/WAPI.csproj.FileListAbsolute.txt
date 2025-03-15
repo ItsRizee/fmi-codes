@@ -85,3 +85,14 @@ C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll

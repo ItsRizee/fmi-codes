@@ -15,8 +15,19 @@ public class GetSatelliteByIdHandler : IRequestHandler<GetSatelliteByIdRequest, 
 
     public async Task<SatelliteDTO> Handle(GetSatelliteByIdRequest request, CancellationToken cancellationToken)
     {
-        var names = await _context.SatelliteTLE.Select(s => s.SatelliteName).Take(1).ToListAsync(cancellationToken);
-        return new SatelliteDTO(1, names[0], 1, "");
+        var satellite = await _context.SatelliteTLE
+            .Where(sat => sat.Id == request.Id)
+            .Select(sat => new SatelliteDTO(
+                sat.Id,
+                sat.SatelliteName,
+                sat.SatelliteNumber,
+                sat.SatelliteDescription ?? "Currently no information about this satellite"
+            ))
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (satellite == null)
+            throw new KeyNotFoundException($"Satellite with ID {request.Id} not found");
+
+        return satellite;
     }
-    
 }
