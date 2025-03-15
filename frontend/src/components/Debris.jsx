@@ -3,6 +3,10 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { TLEtoXYZ } from '../TLEtoXYZ';
 
+
+/* ------------------------------------------
+|                   Brayan <=               |
+-------------------------------------------*/
 const generateRandomOrbit = () => {
     return {
         Inclination: Math.random() * 180,
