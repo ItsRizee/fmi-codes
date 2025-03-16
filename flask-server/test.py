@@ -62,18 +62,18 @@ numerical_propagator2 = NumericalPropagator(integrator2)
 # Add force models (example)
 earth = Constants.WGS84_EARTH_MU
 inertial_frame = FramesFactory.getEME2000()
-gravity_field = HolmesFeatherstoneAttractionModel(inertial_frame, Constants.WGS84_EARTH_EQUATORIAL_RADIUS, earth, 4, 4) # 4,4 is example, increase for accuracy.
-atmosphere = HarrisPriester(Constants.WGS84_EARTH_EQUATORIAL_RADIUS, earth)
-drag_force = DragForce(atmosphere)
-solar_radiation_pressure = SolarRadiationPressure(Constants.WGS84_EARTH_EQUATORIAL_RADIUS, Constants.SOLAR_FLUX, 10.0) # 10.0 is example surface area/mass
+# gravity_field = HolmesFeatherstoneAttractionModel(inertial_frame, Constants.WGS84_EARTH_EQUATORIAL_RADIUS, earth, 4, 4) # 4,4 is example, increase for accuracy.
+# atmosphere = HarrisPriester(Constants.WGS84_EARTH_EQUATORIAL_RADIUS, earth)
+# drag_force = DragForce(atmosphere)
+# solar_radiation_pressure = SolarRadiationPressure(Constants.WGS84_EARTH_EQUATORIAL_RADIUS, Constants.SOLAR_FLUX, 10.0) # 10.0 is example surface area/mass
 
 
-numerical_propagator1.addForceModel(gravity_field)
-numerical_propagator1.addForceModel(drag_force)
-numerical_propagator1.addForceModel(solar_radiation_pressure)
-numerical_propagator2.addForceModel(gravity_field)
-numerical_propagator2.addForceModel(drag_force)
-numerical_propagator2.addForceModel(solar_radiation_pressure)
+# numerical_propagator1.addForceModel(gravity_field)
+# numerical_propagator1.addForceModel(drag_force)
+# numerical_propagator1.addForceModel(solar_radiation_pressure)
+# numerical_propagator2.addForceModel(gravity_field)
+# numerical_propagator2.addForceModel(drag_force)
+# numerical_propagator2.addForceModel(solar_radiation_pressure)
 
 # Add StateCovariance
 state_covariance1 = StateCovariance(keplerian_orbit1, OrbitType.CARTESIAN, PositionAngleType.TRUE)
