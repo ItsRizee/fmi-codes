@@ -1,4 +1,5 @@
 using Domain.Satelite.Handlers.Get;
+using Domain.Satellite.Handlers.Get.GetDebries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +64,20 @@ public class Controllers : ControllerBase
     {
         var file = await _mediator.Send(new GenerateFileRequest(ids)); 
         return file;
+    }
+    
+    [HttpGet("getDebrie/{id}")]
+    public async Task<IActionResult> GetDebrieId(int id)
+    {
+        try
+        {
+            var debrie = await _mediator.Send(new GetDebrieByIdRequest { Id = id });
+            return Ok(debrie);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
 }
