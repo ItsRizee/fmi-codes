@@ -4,6 +4,7 @@ import numpy as np
 
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.propagation.analytical.tle import TLE, TLEPropagator
+
 from math import radians, degrees
 
 def normal_distribution_mapping(x, sigma=500, threshold=0):
@@ -12,7 +13,7 @@ def normal_distribution_mapping(x, sigma=500, threshold=0):
     else:
         return np.exp(-0.5 * ((x - threshold) / sigma) ** 2)
  
-# Sample TLE data (replace with your database retrieval)
+
 # line1_1 = "1 00900U 64063C 00025,07323370  +0,00001305  00000-0 00000-0 999 11"
 # line2_1 = "2 00900 8904f 8614f 75f 82434f 81374f 11148f 000814"
 
@@ -48,6 +49,7 @@ def possibility_of_collision(s, d):
     # Define encounter time
     encounter_date = AbsoluteDate(2024, 1, 1, 12, 0, 0.0, utc)
 
+
     time_window = 60.0 * 10  # 10 minutes
     time_step = 60.0  # 1 minute
 
@@ -74,5 +76,5 @@ def possibility_of_collision(s, d):
 
     return {pc, minimum_distance, most_probable_collision_time}
 
-
 # possibility_of_collision(line1_1, line2_1, line1_2, line2_2)
+
