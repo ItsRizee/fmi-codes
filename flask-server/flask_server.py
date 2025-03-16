@@ -40,7 +40,7 @@ def convert_day_of_year(year, day):
 
 def possibility_of_collision(s, d):
     vm.attachCurrentThread()
-    launchY = 1900 + int(s["InternationalDesignator"][:2])
+    launchY = int(1900 + int(s["InternationalDesignator"][:2]))
     launchN = s["InternationalDesignator"][2:5]
     launchP = s["InternationalDesignator"][5:8]
 
@@ -73,7 +73,7 @@ def possibility_of_collision(s, d):
     classification = str(s["Classification"])
     launch_year = int(launchY)
     launch_number = int(launchN)
-    launch_piece = str(launch_piece)
+    launch_piece = str(launchP)
     ephemeris_type = 0
     element_number = 999
     revolution_number = int(s["RevolutionNumberAtEpoch"])
@@ -104,7 +104,7 @@ def possibility_of_collision(s, d):
                             revolution_number,
                             b_star_first_guess)
 
-    launchY = 1900 + int(d["InternationalDesignator"][:2])
+    launchY = int(1900 + int(d["InternationalDesignator"][:2]))
     launchN = d["InternationalDesignator"][2:5]
     launchP = d["InternationalDesignator"][5:8]
 
@@ -121,7 +121,7 @@ def possibility_of_collision(s, d):
     classification = str(d["Classification"])
     launch_year = int(launchY)
     launch_number = int(launchN)
-    launch_piece = str(launch_piece)
+    launch_piece = str(launchP)
     ephemeris_type = 0
     element_number = 999
     revolution_number = int(d["RevolutionNumberAtEpoch"])
@@ -181,6 +181,8 @@ def possibility_of_collision(s, d):
             minimum_distance = rel_distance
             most_probable_collision_time = dt
 
+    if(minimum_distance==float('inf')):
+        minimum_distance = 9999999999
     return {"collision_probability": pc, "min_distance": minimum_distance, "time_to_collision": most_probable_collision_time}
 
 @app.route('/')
@@ -192,7 +194,7 @@ def get_info_for_satellite():
     data = request.get_json()
 
     obj1 = data.get("sat")
-    obj2 = data.get("debries")
+    obj2 = data.get("debriesCollisionDto")
 
     result = possibility_of_collision(obj1, obj2)
 
