@@ -104,8 +104,6 @@ def possibility_of_collision(s, d):
                             revolution_number,
                             b_star_first_guess)
 
-    print(s["InternationalDesignator"])
-    print(d["InternationalDesignator"])
     launchY = int(1900 + int(d["InternationalDesignator"][:2]))
     launchN = d["InternationalDesignator"][2:5]
     launchP = d["InternationalDesignator"][5:8]
@@ -183,6 +181,8 @@ def possibility_of_collision(s, d):
             minimum_distance = rel_distance
             most_probable_collision_time = dt
 
+    if(minimum_distance==float('inf')):
+        minimum_distance = 9999999999
     return {"collision_probability": pc, "min_distance": minimum_distance, "time_to_collision": most_probable_collision_time}
 
 @app.route('/')
