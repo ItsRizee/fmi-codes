@@ -4,15 +4,32 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import {getSatellitesCollision} from "../services/getSatellitesCollision";
 
-const CheckboxList = ({satellites, checked, setChecked}) => {
+const CheckboxList = ({satellites, checked, setChecked, setCheckedSatellites, checkedSatellites}) => {
 
-    const handleToggle = (value) => () => {
+    const handleToggle =  (value) => async () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
         if (currentIndex === -1) {
             newChecked.push(value);
+            const data = await getSatellitesCollision(value);
+            setCheckedSatellites([
+                ...checkedSatellites,
+                {
+                    id: data.satelliteDto.id,
+                    name: data.satelliteDto.name,
+                    number: data.satelliteDto.number,
+                    inclination: data.satelliteDto.inclination,
+                    rightAscensionOfAscendingNode: data.satelliteDto.rightAscensionOfAscendingNode,
+                    eccentricity: data.satelliteDto.eccentricity,
+                    argumentOfPerigee: data.satelliteDto.argumentOfPerigee,
+                    meanAnomaly: data.satelliteDto.meanAnomaly,
+                    meanMotion: data.satelliteDto.meanMotion,
+                    satelliteDescription: data.satelliteDto.satelliteDescription
+                }
+            ]);
         } else {
             newChecked.splice(currentIndex, 1);
         }

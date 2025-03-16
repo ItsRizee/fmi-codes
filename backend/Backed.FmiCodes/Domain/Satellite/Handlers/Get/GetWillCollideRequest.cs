@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Domain.Satelite.Handlers.Get;
 
-public class GetWillCollideRequest:IRequest<List<CollisionResDTO>>
+public class GetWillCollideRequest:IRequest<CollisionDTO>
 { 
     public int Id { get; set; }
 }

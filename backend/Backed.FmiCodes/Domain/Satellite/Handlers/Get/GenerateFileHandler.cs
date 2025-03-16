@@ -20,8 +20,6 @@ public class GenerateFileHandler : IRequestHandler<GenerateFileRequest, FileCont
 
     public async Task<FileContentResult> Handle(GenerateFileRequest request, CancellationToken cancellationToken)
     {
-
-
         Console.WriteLine(request.Ids.Take(0));
         Console.WriteLine(request.Ids.Contains(1));
         var id = await _context.SatelliteTLE.Select(s => s.Id).Take(1).FirstOrDefaultAsync();
@@ -44,12 +42,10 @@ public class GenerateFileHandler : IRequestHandler<GenerateFileRequest, FileCont
                 FileDownloadName = "satellites.json"
             };
         }
-
-        // Convert DTOs to JSON
+        
         var jsonString = JsonConvert.SerializeObject(fileDTOs, Formatting.Indented);
         var fileBytes = Encoding.UTF8.GetBytes(jsonString);
-
-        // ✅ Return file with proper headers for automatic download
+        
         return new FileContentResult(fileBytes, "application/json")
         {
             FileDownloadName = "satellites.json"

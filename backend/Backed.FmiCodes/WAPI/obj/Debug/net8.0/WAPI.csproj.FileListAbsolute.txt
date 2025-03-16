@@ -104,3 +104,11 @@ C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Ivan\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\user\RiderProjects\fmi-codes\backend\Backed.FmiCodes\WAPI\bin\Debug\net8.0\Newtonsoft.Json.dll

@@ -21,6 +21,12 @@ public class GetSatelliteByIdHandler : IRequestHandler<GetSatelliteByIdRequest, 
                 sat.Id,
                 sat.SatelliteName,
                 sat.SatelliteNumber,
+                sat.Inclination,
+                sat.RightAscensionOfAscendingNode,
+                sat.Eccentricity,
+                sat.ArgumentOfPerigee,
+                sat.MeanAnomaly,
+                sat.MeanMotion,
                 sat.SatelliteDescription ?? "Currently no information about this satellite"
             ))
             .FirstOrDefaultAsync(cancellationToken);

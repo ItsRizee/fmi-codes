@@ -1,0 +1,37 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:  
+      - "3000:80"
+    networks:
+      - scrapsat
+  backend:
+    build: ./backend
+    ports:
+      - "5001:8080"
+    depends_on:
+      - flask
+      - db
+    networks:
+      - scrapsat
+  flask:
+    build: ./flask-server
+    ports:
+      - "5000:5000"
+    networks:
+      - scrapsat
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Walhalen_3pich
+      MYSQL_DATABASE: dbfmicodes
+    ports:
+      - '33306:3306'
+    # volumes:
+    #   - db_data:/var/lib/mysql
+networks:
+  scrapsat:
+    # Specify driver options
+    driver: bridge
+# volumes:
+#   db_data:
