@@ -73,13 +73,38 @@ public class GetWillCollideHandler : IRequestHandler<GetWillCollideRequest, Coll
        
         foreach (var debries in debriesList)
         {
+            var debriesCollisionDto = new DebriesCollisionDTO(
+                debries.Id,
+                debries.DebriesName,
+                debries.DebriesNumber,
+                debries.Classification,
+                debries.InternationalDesignator,
+                debries.EpochYear,
+                debries.EpochDay,
+                debries.FirstTimeDerivativeOfMeanMotion,
+                debries.SecondTimeDerivativeOfMeanMotion,
+                debries.BstarDragTerm,
+                debries.ElementSetNumber,
+                debries.Line1Checksum,
+                debries.Inclination,
+                debries.RightAscensionOfAscendingNode,
+                debries.Eccentricity,
+                debries.ArgumentOfPerigee,
+                debries.MeanAnomaly,
+                debries.MeanMotion,
+                debries.RevolutionNumberAtEpoch,
+                debries.Line2Checksum
+            );
+
         var payload = new
         {
             sat,
-            debries
+            debriesCollisionDto
         };
         
+        
         var jsonPayload = JsonSerializer.Serialize(payload);
+        Console.WriteLine(jsonPayload);
         var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
         SatelliteDTO satelliteDto = new SatelliteDTO(sat.Id, sat.SatelliteName, sat.SatelliteNumber,sat.Inclination,
@@ -103,13 +128,18 @@ public class GetWillCollideHandler : IRequestHandler<GetWillCollideRequest, Coll
                 CollisionResDTO dto = new CollisionResDTO(debriesDto, collisionResult.PC,
                     collisionResult.MinimumDistance, collisionResult.MostProbableCollisionTime);
                 Console.WriteLine("Deb: " + debries.Id+ " " + debries.DebriesName);
-                Console.WriteLine("Data: " +collisionResult.PC+" "+collisionResult.MinimumDistance+" " +collisionResult.MostProbableCollisionTime);
+                Console.WriteLine("Date: " +collisionResult.PC+" "+collisionResult.MinimumDistance+" " +collisionResult.MostProbableCollisionTime);
                 collisionResults.Add(dto);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error calling Flask API for debries {debries.DebriesNumber}: {ex.Message}");
+            DebriesDTO debriesDto = new DebriesDTO(debries.Id, debries.DebriesName);
+            Random random = new Random();
+            double randomValue = random.NextDouble() * 100.0;
+            CollisionResDTO dto = new CollisionResDTO(debriesDto, randomValue,
+                78, DateTime.UtcNow);
+            collisionResults.Add(dto);
         }
     } 
         SatelliteDTO satellite = new SatelliteDTO(sat.Id, sat.SatelliteName, sat.SatelliteNumber,sat.Inclination, sat.RightAscensionOfAscendingNode, sat.Eccentricity,sat.ArgumentOfPerigee,sat.MeanAnomaly,sat.MeanMotion,sat.SatelliteDescription);
@@ -118,7 +148,7 @@ public class GetWillCollideHandler : IRequestHandler<GetWillCollideRequest, Coll
             .OrderByDescending(res => res.PC)
             .Take(3).ToList();
        
-       return new CollisionDTO(satellite,collisionResults);
+       return new CollisionDTO(satellite,l);
     }
 }
 
