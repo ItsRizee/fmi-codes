@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getSatelliteByIdPagination = async (search, page, count) => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/Controllers/GetSatelliteByIdPagination`, {
+        const response = await axios.get(`http://localhost:5001/api/Controllers/GetSatelliteByIdPagination`, {
            params: { name: search,
             page: page,
             count: count}

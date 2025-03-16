@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, Line } from "@react-three/drei";
 import { TLEtoXYZ } from "../TLEtoXYZ";
+import { forwardRef } from "react";
 
-export default function Satellite({ tleData }) {
+const Satellite = forwardRef(({ tleData }, satelliteRef) => {
     const { nodes, materials } = useGLTF('/satellite.gltf');
-    const satelliteRef = useRef();
+
     const scaleFactor = 1800000;
     let speed = 2;
 
@@ -65,4 +66,6 @@ export default function Satellite({ tleData }) {
             />
         </>
     );
-}
+});
+export default Satellite;
+
