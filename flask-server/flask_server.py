@@ -40,7 +40,7 @@ def convert_day_of_year(year, day):
 
 def possibility_of_collision(s, d):
     vm.attachCurrentThread()
-    launchY = 1900 + int(s["InternationalDesignator"][:2])
+    launchY = int(1900 + int(s["InternationalDesignator"][:2]))
     launchN = s["InternationalDesignator"][2:5]
     launchP = s["InternationalDesignator"][5:8]
 
@@ -104,7 +104,9 @@ def possibility_of_collision(s, d):
                             revolution_number,
                             b_star_first_guess)
 
-    launchY = 1900 + int(d["InternationalDesignator"][:2])
+    print(s["InternationalDesignator"])
+    print(d["InternationalDesignator"])
+    launchY = int(1900 + int(d["InternationalDesignator"][:2]))
     launchN = d["InternationalDesignator"][2:5]
     launchP = d["InternationalDesignator"][5:8]
 
@@ -117,7 +119,7 @@ def possibility_of_collision(s, d):
     pa = float(d["ArgumentOfPerigee"])
     raan = float(d["RightAscensionOfAscendingNode"])
     ma = float(d["MeanAnomaly"])  # Mean anomaly
-    satellite_number = int(d["DebriesNumber"])
+    satellite_number = int(d["SatelliteNumber"])
     classification = str(d["Classification"])
     launch_year = int(launchY)
     launch_number = int(launchN)
@@ -192,7 +194,7 @@ def get_info_for_satellite():
     data = request.get_json()
 
     obj1 = data.get("sat")
-    obj2 = data.get("debries")
+    obj2 = data.get("debriesCollisionDto")
 
     result = possibility_of_collision(obj1, obj2)
 
