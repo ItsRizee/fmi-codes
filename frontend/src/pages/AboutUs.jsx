@@ -4,6 +4,7 @@ import { Environment, Text } from '@react-three/drei';
 import Saturn from '../components/Saturn';
 import Pluto from '../components/Pluto';
 import '../styles/AboutUs.css';
+import MyButton from '../components/Button';
 
 const AboutUs = () => {
   // Component for spinning planets
@@ -22,6 +23,7 @@ const AboutUs = () => {
       <div className="overlay" />
       <h1 style={{ marginTop: '150px' }}>About Us</h1>
       <p className='coders-text'>Made by your happy coders :) <span>fmi-codes 16.03.2025</span></p>
+      <MyButton />
       <Canvas>
         <ambientLight intensity={0.1} />
 

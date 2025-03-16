@@ -1,10 +1,6 @@
 import orekit
 import numpy as np
-vm = orekit.initVM()
 
-from orekit.pyhelpers import setup_orekit_curdir, download_orekit_data_curdir
-download_orekit_data_curdir()
-setup_orekit_curdir('./orekit-data.zip')
 
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.propagation.analytical.tle import TLE, TLEPropagator
@@ -33,20 +29,18 @@ def normal_distribution_mapping(x, sigma=500, threshold=0):
 def possibility_of_collision(s, d):
 
     print(s)
-    launchY = 1900 + int(s.InternationalDesignator[:2])
-    launchN = s.InternationalDesignator[2:5]
-    launchP = s.InternationalDesignator[5:8]
+    launchY = 1900 + int(s["InternationalDesignator"][:2])
+    launchN = s["InternationalDesignator"][2:5]
+    launchP = s["InternationalDesignator"][5:8]
 
     utc = TimeScalesFactory.getUTC()
 
-    tle1 = TLE(s.SatelliteNumber, s.Classification, launchY, launchN, launchP, 0, 0, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
+    tle1 = TLE(s["SatelliteNumber"], s["Classification"], launchY, launchN, launchP, 0, 0, AbsoluteDate(s["EpochYear"], s["EpochDay"]), s["MeanMotion"], s["FirstTimeDerivativeOfMeanMotion"], s["SecondTimeDerivativeOfMeanMotion"], s["Eccentricity"], s["Inclination"], s["ArgumentOfPerigee"], s["RightAscensionOfAscendingNode"], s["MeanAnomaly"], s["RevolutionNumberAtEpoch"], s["BstarDragTerm"], utc)
     
-    launchY = 1900 + int(d.InternationalDesignator[:2])
-    launchN = d.InternationalDesignator[2:5]
-    launchP = d.InternationalDesignator[5:8]
-    tle2 = TLE(d.SatelliteNumber, d.Classification, launchY, launchN, launchP, 0, 1, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
-
-
+    launchY = 1900 + int(d["InternationalDesignator"][:2])
+    launchN = d["InternationalDesignator"][2:5]
+    launchP = d["InternationalDesignator"][5:8]
+    tle2 = TLE(d["SatelliteNumber"], d["Classification"], launchY, launchN, launchP, 0, 0, AbsoluteDate(d["EpochYear"], d["EpochDay"]), d["MeanMotion"], d["FirstTimeDerivativeOfMeanMotion"], d["SecondTimeDerivativeOfMeanMotion"], d["Eccentricity"], d["Inclination"], d["ArgumentOfPerigee"], d["RightAscensionOfAscendingNode"], d["MeanAnomaly"], d["RevolutionNumberAtEpoch"], d["BstarDragTerm"], utc)
     # Create TLE propagator
 
     propagator1 = TLEPropagator.selectExtrapolator(tle1)

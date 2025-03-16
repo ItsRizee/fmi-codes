@@ -14,6 +14,7 @@ import Debris from '../components/Debris';
 import DownloadButton from '../components/DownloadButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import NavigateButton from "../components/NavigateButton";
 
 import { getSatelliteByIdPagination } from "../services/getSatelliteByIdPagination";
 import { Chart } from "react-google-charts";
@@ -230,9 +231,12 @@ const Home = () => {
                     options={options}
                 />
             </Paper>
-
-            {checked.length > 0 && currentSatellite !== null &&
-                <Paper elevation={3} className='satellite-info-container'>
+            <NavigateButton/>
+            { checked.length > 0 && currentSatellite !== null &&
+                <Paper
+                    elevation={3}
+                    className='satellite-info-container'
+                >
                     <h2 className='collision-heading'>{currentSatellite.name}</h2>
                     <p className='satellite-description'>{currentSatellite.satelliteDescription}</p>
                     <Button variant="outlined" endIcon={<DoubleArrowIcon />}>Learn more</Button>
