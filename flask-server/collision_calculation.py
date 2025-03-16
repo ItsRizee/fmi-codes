@@ -18,16 +18,33 @@ def normal_distribution_mapping(x, sigma=500, threshold=0):
         return np.exp(-0.5 * ((x - threshold) / sigma) ** 2)
  
 # Sample TLE data (replace with your database retrieval)
-line1_1 = "1 25544U 98067A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
-line2_1 = "2 25544  51.6400  97.4300 0005700 182.0200 178.6500 15.50000000000000"
+# line1_1 = "1 00900U 64063C 00025,07323370  +0,00001305  00000-0 00000-0 999 11"
+# line2_1 = "2 00900 8904f 8614f 75f 82434f 81374f 11148f 000814"
 
-line1_2 = "1 44888U 24001A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
-line2_2 = "2 44888  51.6401  97.4301 0005701 182.0201 178.6501 15.50000000000000"
+# line1_2 = "1 99010D 99010K 00025,07302560  +0,00030125  00000-0 00000-0 777 10"
+# line2_2 = "2 99010 8324f 81964f 0,0011020 82874f 8724f 11108f 016592"
 
-def possibility_of_collision(line1_1, line2_1, line1_2, line2_2):
+# line1_1 = "1 25544U 98067A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
+# line2_1 = "2 25544  51.6400  97.4300 0005700 182.0200 178.6500 15.50000000000000"
 
-    tle1 = TLE(line1_1, line2_1)
-    tle2 = TLE(line1_2, line2_2)
+# line1_2 = "1 44888U 24001A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
+# line2_2 = "2 44888  51.6401  97.4301 0005701 182.0201 178.6501 15.50000000000000"
+
+def possibility_of_collision(s, d):
+
+    print(s)
+    launchY = 1900 + int(s.InternationalDesignator[:2])
+    launchN = s.InternationalDesignator[2:5]
+    launchP = s.InternationalDesignator[5:8]
+
+    utc = TimeScalesFactory.getUTC()
+
+    tle1 = TLE(s.SatelliteNumber, s.Classification, launchY, launchN, launchP, 0, 0, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
+    
+    launchY = 1900 + int(d.InternationalDesignator[:2])
+    launchN = d.InternationalDesignator[2:5]
+    launchP = d.InternationalDesignator[5:8]
+    tle2 = TLE(d.SatelliteNumber, d.Classification, launchY, launchN, launchP, 0, 1, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
 
     # Create TLE propagator
 
@@ -35,7 +52,6 @@ def possibility_of_collision(line1_1, line2_1, line1_2, line2_2):
     propagator2 = TLEPropagator.selectExtrapolator(tle2)
 
     # Define encounter time
-    utc = TimeScalesFactory.getUTC()
     encounter_date = AbsoluteDate(2024, 1, 1, 12, 0, 0.0, utc)
 
     time_window = 60.0 * 10  # 10 minutes
@@ -65,4 +81,4 @@ def possibility_of_collision(line1_1, line2_1, line1_2, line2_2):
     return {pc, minimum_distance, most_probable_collision_time}
 
 
-possibility_of_collision(line1_1, line2_1, line1_2, line2_2)
+# possibility_of_collision(line1_1, line2_1, line1_2, line2_2)

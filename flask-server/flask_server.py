@@ -15,12 +15,10 @@ def hello_world():
 def get_info_for_satellite():
     data = request.get_json()
 
-    line1_1 = data.get("tleLine1")
-    line2_1 = data.get("tleLine2")
-    line1_2 = data.get("tleLine1Debries")
-    line2_2 = data.get("tleLine2Debries")
+    obj1 = data.get("sat")
+    obj2 = data.get("debries")
 
-    result = possibility_of_collision(line1_1, line2_1, line1_2, line2_2)
+    result = possibility_of_collision(obj1, obj2)
 
     return jsonify(result)
 
