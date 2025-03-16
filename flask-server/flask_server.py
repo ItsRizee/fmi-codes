@@ -73,7 +73,7 @@ def possibility_of_collision(s, d):
     classification = str(s["Classification"])
     launch_year = int(launchY)
     launch_number = int(launchN)
-    launch_piece = str(launch_piece)
+    launch_piece = str(launchP)
     ephemeris_type = 0
     element_number = 999
     revolution_number = int(s["RevolutionNumberAtEpoch"])
@@ -117,11 +117,11 @@ def possibility_of_collision(s, d):
     pa = float(d["ArgumentOfPerigee"])
     raan = float(d["RightAscensionOfAscendingNode"])
     ma = float(d["MeanAnomaly"])  # Mean anomaly
-    satellite_number = int(d["SatelliteNumber"])
+    satellite_number = int(d["DebriesNumber"])
     classification = str(d["Classification"])
     launch_year = int(launchY)
     launch_number = int(launchN)
-    launch_piece = str(launch_piece)
+    launch_piece = str(launchP)
     ephemeris_type = 0
     element_number = 999
     revolution_number = int(d["RevolutionNumberAtEpoch"])
