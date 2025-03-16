@@ -75,7 +75,7 @@ canvas {
 .collision-container {
     border-radius: 30px !important;
     width: 400px;
-    height: 300px;
+    height: 450px;
     position: absolute;
     right: 8%;
     top: 8%;
@@ -142,4 +142,8 @@ canvas {
     left: 50%;
     bottom: 68%;
     font-size: 40px;
+}
+
+svg g g g line {
+    stroke: rgba(240, 240, 240, 0.6) !important;
 }

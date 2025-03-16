@@ -19,36 +19,56 @@ import {getSatelliteById} from "../services/getSatelliteById";
 
 const Home = () => {
     const [search, setSearch] = useState('');
-    const [satellites, setSatellites] = useState([]);
+    const [satellites, setSatellites] = useState([]); // [{name, id}]
     const [page, setPage] = useState(0);
-    const [checked, setChecked] = useState([]);
-    const [currentSatelliteIndex, setCurrentSatelliteIndex] = useState(0);
-    const [currentSatellite, setCurrentSatellite] = useState(null);
+    const [checked, setChecked] = useState([]); // [{id}]
+    const [currentSatelliteIndex, setCurrentSatelliteIndex] = useState(0); // stallite info index
+    const [currentSatellite, setCurrentSatellite] = useState(null); // satellite info
+    const [selectedSatellites, setSelectedSatellites] = useState([]);
     const count = 10;
     const maxCheckedSatellites = 3;
 
+
     const options = {
-        chartArea: { width: "50%" },
+        chartArea: {
+            width: "50%",
+            backgroundColor: "transparent",
+        },
         hAxis: {
-          title: "Probabiility (%)",
-          minValue: 0,
+            title: "Probability (%)",
+            minValue: 0,
+            textStyle: { color: "#9a999a" },
+            gridlines: {
+                color: "#9a999a",
+                count: 5
+            },
+            minorGridlines: {
+                color: "#9a999a",
+                count: 10
+            },
+            baselineColor: "#9a999a",
+            format: "#"
         },
         vAxis: {
-          title: "Satellite",
+            title: "Satellite",
+            textStyle: { color: "#9a999a" },
+            gridlines: {
+                color: "#9a999a",
+                count: -1
+            },
         },
-        backgroundColor: "#ababab", // Background outside chart
-        chartArea: {
-            backgroundColor: "#000000", // Background inside chart
-            width: "80%",
-            height: "70%",
-        },
-      };
+        backgroundColor: "transparent",
+        legend: { textStyle: { color: "#9a999a" } },
+    };
 
-
+    // checkbox list satellites
     const fetchData = async () => {
         try {
             const data = await getSatelliteByIdPagination(search, page, count);
             setSatellites(data);
+            if(checked.length === 0) {
+                setChecked([...checked, data[0].id]);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -66,7 +86,7 @@ const Home = () => {
                         const data = await getSatelliteById(checked[tmp]);
                         setCurrentSatellite(data);
                     }
-                } else {
+                } else if(checked.length > 0) {
                     const data = await getSatelliteById(checked[currentSatelliteIndex]);
                     setCurrentSatellite(data);
                 }
