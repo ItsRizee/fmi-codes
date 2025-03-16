@@ -12,6 +12,7 @@ import Debris from '../components/Debris';
 import DownloadButton from '../components/DownloadButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import NavigateButton from "../components/NavigateButton";
 
 import {getSatelliteByIdPagination} from "../services/getSatelliteByIdPagination";
 import { Chart } from "react-google-charts";
@@ -158,6 +159,7 @@ const Home = () => {
                 />
 
             </Paper>
+            <NavigateButton/>
             { checked.length > 0 && currentSatellite !== null &&
                 <Paper
                     elevation={3}
