@@ -2,11 +2,12 @@ namespace Domain.Satellite.Dto;
 
 public class CollisionResDTO
 {
-    public int Id { get; set; }
+    public DebriesDTO debriesDto { get; set; }
     public double PC { get; set; }
     public double MinimumDistance { get; set; }
     public DateTime MostProbableCollisionTime { get; set; }
 
+    public CollisionResDTO() { }
     public CollisionResDTO(double pc, double minimumDistance, DateTime mostProbableCollisionTime)
     {
         PC = pc;
@@ -14,9 +15,9 @@ public class CollisionResDTO
         MostProbableCollisionTime = mostProbableCollisionTime;
     }
 
-    public CollisionResDTO(int id, double pc, double minimumDistance, DateTime mostProbableCollisionTime)
+    public CollisionResDTO(DebriesDTO debriesDto, double pc, double minimumDistance, DateTime mostProbableCollisionTime)
     {
-        Id = id;
+        this.debriesDto = debriesDto;
         PC = pc;
         MinimumDistance = minimumDistance;
         MostProbableCollisionTime = mostProbableCollisionTime;
