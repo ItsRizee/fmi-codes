@@ -7,6 +7,7 @@ from collision_calculation import possibility_of_collision
 # current module (__name__) as argument.
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello_world():
     return 'Hello World'
