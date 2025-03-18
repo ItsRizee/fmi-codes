@@ -11,7 +11,7 @@ import axios from "axios";
           } ,
           responseType: "blob"
         }
-       
+
     );
 
     // Create a URL for the blob response

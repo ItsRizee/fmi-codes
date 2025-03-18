@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DataBaseConnection");
+Console.WriteLine(connectionString);
 builder.Services.AddDbContext<SatelliteDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
@@ -31,7 +32,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000","http://localhost:3001")
             .AllowAnyMethod()
             .AllowAnyHeader();
     });

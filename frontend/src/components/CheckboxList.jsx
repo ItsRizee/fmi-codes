@@ -27,11 +27,17 @@ const CheckboxList = ({satellites, checked, setChecked, setCheckedSatellites, ch
                     argumentOfPerigee: data.satelliteDto.argumentOfPerigee,
                     meanAnomaly: data.satelliteDto.meanAnomaly,
                     meanMotion: data.satelliteDto.meanMotion,
-                    satelliteDescription: data.satelliteDto.satelliteDescription
+                    satelliteDescription: data.satelliteDto.satelliteDescription,
+                    collisionRes:data.collisionResults
                 }
             ]);
         } else {
             newChecked.splice(currentIndex, 1);
+            const updatedCheckedSatellites = checkedSatellites.filter(
+                (satellite) => satellite.id !== value // assuming `value` is the satellite's ID
+            );
+
+            setCheckedSatellites(updatedCheckedSatellites);
         }
 
         setChecked(newChecked);

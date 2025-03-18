@@ -13,7 +13,7 @@ export const getSatelliteByIdPagination = async (search, page, count) => {
         if(response !== undefined)
         {
             const data = await response.data;
-            console.log(data)
+            // console.log(data)
         }
 
         return response.data;

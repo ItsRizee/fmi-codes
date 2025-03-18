@@ -14,7 +14,7 @@ import Debris from '../components/Debris';
 import DownloadButton from '../components/DownloadButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { getSatelliteByIdPagination } from "../services/getSatelliteByIdPagination";
 import { Chart } from "react-google-charts";
 import { getSatelliteById } from "../services/getSatelliteById";
@@ -200,6 +200,15 @@ const Home = () => {
         return null;
     };
 
+    const[diagramData, setDiagramData] = useState([]);
+    useEffect(() => {
+        let tmp_diagramData =
+        checkedSatellites.map((d) => {
+            return [d.name, Number(d.collisionRes[0].pc)]
+        })
+        setDiagramData(tmp_diagramData);
+    }, [checkedSatellites]);
+
     return (
         <div className="main-container">
             <div className="overlay" />
@@ -215,6 +224,8 @@ const Home = () => {
                     <IconButton type="button" sx={{ p: '10px', marginRight: '20px' }} aria-label="search" onClick={fetchData}>
                         <SearchIcon sx={{ color: 'rgba(240, 240, 240, 0.7)' }} />
                     </IconButton>
+
+                    
                 </Paper>
                 <Divider className='divider' orientation="horizontal" />
                 <CheckboxList satellites={satellites} checked={checked} setChecked={setChecked} setCheckedSatellites={setCheckedSatellites} checkedSatellites={checkedSatellites}/>
@@ -226,7 +237,8 @@ const Home = () => {
                     chartType="BarChart"
                     width="100%"
                     height="400px"
-                    data={[["Satellite", "Probability"], ["ISS", 31], ["Copernicus", 14], ["Balkan 1", 1.2]]}
+                    //data={[["Satellite", "Probability"], ["ISS", 31], ["Copernicus", 14], ["Balkan 1", 1.2]]}
+                    data={[["Satellite", "Probability"],...diagramData]}
                     options={options}
                 />
             </Paper>
@@ -274,6 +286,7 @@ const Home = () => {
                     {/*    </>*/}
                     {/*)}*/}
                     {checkedSatellites.map((sat, index) => (
+
                         <Satellite
                             key={sat.id} // Unique key for React
                             ref={index === 0 ? satelliteRef1 : satelliteRef2} // Assign refs to first two for collision check
