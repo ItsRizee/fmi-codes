@@ -1,8 +1,10 @@
-public class SatelliteTLE 
+namespace Domain.Satelite.Handlers.Get;
+
+public class DebriesCollisionDTO
 {
     public int Id { get; set; }
-    public string SatelliteName { get; set; }
-    public int SatelliteNumber { get; set; }
+    public string DebriesName { get; set; }
+    public int DebriesNumber { get; set; }
     public char Classification { get; set; }
     public string InternationalDesignator { get; set; }
     public int EpochYear { get; set; }
@@ -20,13 +22,12 @@ public class SatelliteTLE
     public double MeanMotion { get; set; }
     public int RevolutionNumberAtEpoch { get; set; }
     public int Line2Checksum { get; set; }
-    public string SatelliteDescription { get; set; }
 
-    public SatelliteTLE(int id, string satelliteName, int satelliteNumber, char classification, string internationalDesignator, int epochYear, double epochDay, double firstTimeDerivativeOfMeanMotion, double secondTimeDerivativeOfMeanMotion, double bstarDragTerm, int elementSetNumber, int line1Checksum, double inclination, double rightAscensionOfAscendingNode, double eccentricity, double argumentOfPerigee, double meanAnomaly, double meanMotion, int revolutionNumberAtEpoch, int line2Checksum, string satelliteDescription)
+    public DebriesCollisionDTO(int id, string debriesName, int debriesNumber, char classification, string internationalDesignator, int epochYear, double epochDay, double firstTimeDerivativeOfMeanMotion, double secondTimeDerivativeOfMeanMotion, double bstarDragTerm, int elementSetNumber, int line1Checksum, double inclination, double rightAscensionOfAscendingNode, double eccentricity, double argumentOfPerigee, double meanAnomaly, double meanMotion, int revolutionNumberAtEpoch, int line2Checksum)
     {
         Id = id;
-        SatelliteName = satelliteName;
-        SatelliteNumber = satelliteNumber;
+        DebriesName = debriesName;
+        DebriesNumber = debriesNumber;
         Classification = classification;
         InternationalDesignator = internationalDesignator;
         EpochYear = epochYear;
@@ -44,6 +45,5 @@ public class SatelliteTLE
         MeanMotion = meanMotion;
         RevolutionNumberAtEpoch = revolutionNumberAtEpoch;
         Line2Checksum = line2Checksum;
-        SatelliteDescription = satelliteDescription;
     }
 }

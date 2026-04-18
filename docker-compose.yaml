@@ -5,15 +5,18 @@ services:
       - "3000:80"
     networks:
       - scrapsat
-#  backend:
-#    build: ./backend
-#    ports:
-#      - "5001:8080"
-#    depends_on:
-#      - flask
-#      - db
-#    networks:
-#      - scrapsat
+  backend:
+    build: ./backend
+    ports:
+      - "5001:8080"
+    environment:
+      - ConnectionStrings__DataBaseConnection=server=db;port=3306;database=dbfmicodes;user=root;password=Walhalen_3pich;
+      - ConnectionStrings__flaskApiUrl=http://flask:5000/possibility_of_collision
+    depends_on:
+      - flask
+      - db
+    networks:
+      - scrapsat
   flask:
     build: ./flask-server
     ports:
@@ -27,13 +30,10 @@ services:
       MYSQL_DATABASE: dbfmicodes
     ports:
         - '33306:3306'
+    volumes:
+      - ./DB/dbInit.sql:/docker-entrypoint-initdb.d/dbInit.sql
     networks:
       - scrapsat
-    # volumes:
-    #   - db_data:/var/lib/mysql
 networks:
   scrapsat:
-    # Specify driver options
     driver: bridge
-# volumes:
-#   db_data:

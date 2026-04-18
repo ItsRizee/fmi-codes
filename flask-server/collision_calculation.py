@@ -2,8 +2,7 @@ import orekit
 import numpy as np
 vm = orekit.initVM()
 
-from orekit.pyhelpers import setup_orekit_curdir, download_orekit_data_curdir
-download_orekit_data_curdir()
+from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir('./orekit-data.zip')
 
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
@@ -16,59 +15,81 @@ def normal_distribution_mapping(x, sigma=500, threshold=0):
         return 1
     else:
         return np.exp(-0.5 * ((x - threshold) / sigma) ** 2)
- 
-
-# line1_1 = "1 00900U 64063C 00025,07323370  +0,00001305  00000-0 00000-0 999 11"
-# line2_1 = "2 00900 8904f 8614f 75f 82434f 81374f 11148f 000814"
-
-# line1_2 = "1 99010D 99010K 00025,07302560  +0,00030125  00000-0 00000-0 777 10"
-# line2_2 = "2 99010 8324f 81964f 0,0011020 82874f 8724f 11108f 016592"
-
-# line1_1 = "1 25544U 98067A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
-# line2_1 = "2 25544  51.6400  97.4300 0005700 182.0200 178.6500 15.50000000000000"
-
-# line1_2 = "1 44888U 24001A   24001.00000000  .00000000  00000-0  00000-0 0  9999"
-# line2_2 = "2 44888  51.6401  97.4301 0005701 182.0201 178.6501 15.50000000000000"
 
 def possibility_of_collision(s, d):
+    # s and d are dictionaries from JSON (PascalCase from C#)
+    
+    def get_launch_y(designator):
+        if not designator or len(designator) < 2:
+            return 2000
+        try:
+            yr = int(designator[:2])
+            if yr > 50:
+                return 1900 + yr
+            else:
+                return 2000 + yr
+        except:
+            return 2000
 
-    print(s)
-    launchY = 1900 + int(s.InternationalDesignator[:2])
-    launchN = s.InternationalDesignator[2:5]
-    launchP = s.InternationalDesignator[5:8]
+    launchY1 = get_launch_y(s.get('InternationalDesignator'))
+    launchN1 = (s.get('InternationalDesignator') or "000")[2:5]
+    launchP1 = (s.get('InternationalDesignator') or "A")[5:8]
 
     utc = TimeScalesFactory.getUTC()
 
-    tle1 = TLE(s.SatelliteNumber, s.Classification, launchY, launchN, launchP, 0, 0, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
+    tle1 = TLE(int(s.get('SatelliteNumber', 0)), 
+               s.get('Classification', 'U')[0], 
+               launchY1, launchN1, launchP1, 0, 0, 
+               AbsoluteDate(int(s.get('EpochYear', 2024)), float(s.get('EpochDay', 1.0)), utc), 
+               float(s.get('MeanMotion', 0.0)), 
+               float(s.get('FirstTimeDerivativeOfMeanMotion', 0.0)), 
+               float(s.get('SecondTimeDerivativeOfMeanMotion', 0.0)), 
+               float(s.get('Eccentricity', 0.0)), 
+               float(s.get('Inclination', 0.0)), 
+               float(s.get('ArgumentOfPerigee', 0.0)), 
+               float(s.get('RightAscensionOfAscendingNode', 0.0)), 
+               float(s.get('MeanAnomaly', 0.0)), 
+               int(s.get('RevolutionNumberAtEpoch', 0)), 
+               float(s.get('BstarDragTerm', 0.0)), 
+               utc)
     
-    launchY = 1900 + int(d.InternationalDesignator[:2])
-    launchN = d.InternationalDesignator[2:5]
-    launchP = d.InternationalDesignator[5:8]
-    tle2 = TLE(d.SatelliteNumber, d.Classification, launchY, launchN, launchP, 0, 1, AbsoluteDate(s.EpochYear, s.EpochDay), s.MeanMotion, s.FirstTimeDerivativeOfMeanMotion, s.SecondTimeDerivativeOfMeanMotion, s.Eccentricity, s.Inclination, s.ArgumentOfPerigee, s.RightAscensionOfAscendingNode, s.MeanAnomaly, s.RevolutionNumberAtEpoch, s.BstarDragTerm, utc)
-
-
-    # Create TLE propagator
+    launchY2 = get_launch_y(d.get('InternationalDesignator'))
+    launchN2 = (d.get('InternationalDesignator') or "000")[2:5]
+    launchP2 = (d.get('InternationalDesignator') or "A")[5:8]
+    
+    tle2 = TLE(int(d.get('DebriesNumber', 0)), 
+               d.get('Classification', 'U')[0], 
+               launchY2, launchN2, launchP2, 0, 1, 
+               AbsoluteDate(int(d.get('EpochYear', 2024)), float(d.get('EpochDay', 1.0)), utc), 
+               float(d.get('MeanMotion', 0.0)), 
+               float(d.get('FirstTimeDerivativeOfMeanMotion', 0.0)), 
+               float(d.get('SecondTimeDerivativeOfMeanMotion', 0.0)), 
+               float(d.get('Eccentricity', 0.0)), 
+               float(d.get('Inclination', 0.0)), 
+               float(d.get('ArgumentOfPerigee', 0.0)), 
+               float(d.get('RightAscensionOfAscendingNode', 0.0)), 
+               float(d.get('MeanAnomaly', 0.0)), 
+               int(d.get('RevolutionNumberAtEpoch', 0)), 
+               float(d.get('BstarDragTerm', 0.0)), 
+               utc)
 
     propagator1 = TLEPropagator.selectExtrapolator(tle1)
     propagator2 = TLEPropagator.selectExtrapolator(tle2)
 
-    # Define encounter time
     encounter_date = AbsoluteDate(2024, 1, 1, 12, 0, 0.0, utc)
-
 
     time_window = 60.0 * 10  # 10 minutes
     time_step = 60.0  # 1 minute
 
-    pc = 0
+    pc = 0.0
     minimum_distance = float('inf')
-    most_probable_collision_time = 0
+    most_probable_collision_time = 0.0
 
     for dt in np.arange(-time_window / 2, time_window / 2 + time_step, time_step):
-        # Propagate orbits to encounter time
-        state1 = propagator1.propagate(encounter_date)
-        state2 = propagator2.propagate(encounter_date)
+        current_date = encounter_date.shiftedBy(float(dt))
+        state1 = propagator1.propagate(current_date)
+        state2 = propagator2.propagate(current_date)
 
-        # Get position and velocity vectors
         pos1 = state1.getPVCoordinates().getPosition()
         pos2 = state2.getPVCoordinates().getPosition()
         rel_pos = pos1.subtract(pos2)
@@ -80,7 +101,8 @@ def possibility_of_collision(s, d):
             minimum_distance = rel_distance
             most_probable_collision_time = dt
 
-    return {pc, minimum_distance, most_probable_collision_time}
-
-# possibility_of_collision(line1_1, line2_1, line1_2, line2_2)
-
+    return {
+        "pc": float(pc),
+        "minimumDistance": float(minimum_distance),
+        "mostProbableCollisionTime": float(most_probable_collision_time)
+    }

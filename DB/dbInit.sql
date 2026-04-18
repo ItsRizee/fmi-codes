@@ -5,7 +5,7 @@ LIMIT 0, 1000
 
 -- Date: 2025-03-15 01:50
 */
---CREATE DATABASE dbfmicodes;
+
 
 CREATE TABLE SatelliteTLE (
     ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,7 +17,7 @@ CREATE TABLE SatelliteTLE (
     EpochDay FLOAT,
     FirstTimeDerivativeOfMeanMotion FLOAT,
     SecondTimeDerivativeOfMeanMotion FLOAT,
-    BSTARDragTerm FLOAT,
+    BstarDragTerm FLOAT,
     ElementSetNumber INT,
     Line1Checksum INT,
     Inclination FLOAT,
@@ -31,7 +31,7 @@ CREATE TABLE SatelliteTLE (
     SatelliteDescription TEXT
 );
 
-CREATE TABLE DEBRIES (
+CREATE TABLE Debries (
     id INT primary key auto_increment, 
     DebriesName CHAR(50),
     DebriesNumber INT,
@@ -41,7 +41,7 @@ CREATE TABLE DEBRIES (
     EpochDay FLOAT,
     FirstTimeDerivativeOfMeanMotion FLOAT,
     SecondTimeDerivativeOfMeanMotion FLOAT,
-    BSTARDragTerm FLOAT,
+    BstarDragTerm FLOAT,
     ElementSetNumber INT,
     Line1Checksum INT,
     Inclination FLOAT,
@@ -54,7 +54,7 @@ CREATE TABLE DEBRIES (
     Line2Checksum INT
 );
 
-INSERT INTO SatelliteTLE (SatelliteName,SatelliteNumber,Classification,InternationalDesignator,EpochYear,EpochDay,FirstTimeDerivativeOfMeanMotion,SecondTimeDerivativeOfMeanMotion,BSTARDragTerm,ElementSetNumber,Line1Checksum,Inclination,RightAscensionOfAscendingNode,Eccentricity,ArgumentOfPerigee,MeanAnomaly,MeanMotion,RevolutionNumberAtEpoch,Line2Checksum, SatelliteDescription) VALUES ('CALSPHERE 2',902,'U','64063E',2025,72.9958,0.0000006,0,0,999,3,90.2227,65.0306,0.0020246,120.285,299.267,13.5285,79449,3,NULL),
+INSERT INTO SatelliteTLE (SatelliteName,SatelliteNumber,Classification,InternationalDesignator,EpochYear,EpochDay,FirstTimeDerivativeOfMeanMotion,SecondTimeDerivativeOfMeanMotion,BstarDragTerm,ElementSetNumber,Line1Checksum,Inclination,RightAscensionOfAscendingNode,Eccentricity,ArgumentOfPerigee,MeanAnomaly,MeanMotion,RevolutionNumberAtEpoch,Line2Checksum, SatelliteDescription) VALUES ('CALSPHERE 2',902,'U','64063E',2025,72.9958,0.0000006,0,0,999,3,90.2227,65.0306,0.0020246,120.285,299.267,13.5285,79449,3,NULL),
 ('CALSPHERE 1',900,'U','64063C',2025,73.2337,0.00001305,0,0,999,4,90.2095,61.247,0.0023148,243.015,136.646,13.7588,814,7,NULL),
 ('LCS 1',1361,'U','65034C',2025,72.7125,-0.00000002,0,0,999,9,32.1375,190.354,0.0011526,290.326,69.5999,9.89308,16428,0,NULL),
 ('TEMPSAT 1',1512,'U','65065E',2025,72.9145,0.00000047,0,0,999,4,89.9722,213.138,0.0071527,101.06,20.4665,13.3356,89870,4,NULL),
@@ -1056,7 +1056,7 @@ INSERT INTO SatelliteTLE (SatelliteName,SatelliteNumber,Classification,Internati
 ('ZHUHAI-1 01 (CAS-4A)',42761,'U','17034D',2025,73.2034,0.00069213,0,0,999,0,43.0135,115.891,0.0017663,42.1903,318.031,15.5129,42899,0,NULL);
 
 
-INSERT INTO DEBRIES (DebriesName,DebriesNumber,Classification,InternationalDesignator,EpochYear,EpochDay,FirstTimeDerivativeOfMeanMotion,SecondTimeDerivativeOfMeanMotion,BSTARDragTerm,ElementSetNumber,Line1Checksum,Inclination,RightAscensionOfAscendingNode,Eccentricity,ArgumentOfPerigee,MeanAnomaly,MeanMotion,RevolutionNumberAtEpoch,Line2Checksum)  VALUES ('DEBRIS HIGH 1',99001,'D','99001A',2025,73.2451,0.00002567,0,0,777,9,89.9823,121.547,0.005412,271.785,34.128,13.7598,81214,5),
+INSERT INTO Debries (DebriesName,DebriesNumber,Classification,InternationalDesignator,EpochYear,EpochDay,FirstTimeDerivativeOfMeanMotion,SecondTimeDerivativeOfMeanMotion,BstarDragTerm,ElementSetNumber,Line1Checksum,Inclination,RightAscensionOfAscendingNode,Eccentricity,ArgumentOfPerigee,MeanAnomaly,MeanMotion,RevolutionNumberAtEpoch,Line2Checksum)  VALUES ('DEBRIS HIGH 1',99001,'D','99001A',2025,73.2451,0.00002567,0,0,777,9,89.9823,121.547,0.005412,271.785,34.128,13.7598,81214,5),
 ('DEBRIS HIGH 2',99002,'D','99002B',2025,72.8898,0.00003014,0,0,777,7,90.2431,66.378,0.004189,315.214,287.923,13.5902,75987,6),
 ('DEBRIS HIGH 3',99003,'D','99003C',2025,73.1125,0.00002891,0,0,777,6,32.5879,189.652,0.003478,127.653,74.895,9.9021,16278,3),
 ('DEBRIS MEDIUM 1',99004,'D','99004D',2025,72.9992,0.00001234,0,0,777,5,89.7654,214.123,0.006874,100.764,18.452,13.3225,89523,4),
